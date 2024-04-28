@@ -47,7 +47,7 @@ export const ProfileModal = () => {
   const username = form.watch("username");
   const { allowUpdate, isLoadingUsername } = useUsernameExists(
     username,
-    isOpen || !isSignedUp
+    address && (isOpen || !isSignedUp)
   );
   const { mutateAsync } = trpc.user.editProfile.useMutation();
 

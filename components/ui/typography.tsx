@@ -10,7 +10,8 @@ export const typographyVariants = cva("text-xl", {
       h2: "scroll-m-20 border-b pb-2 text-3xl font-semibold tracking-tight first:mt-0",
       h3: "scroll-m-20 text-2xl font-semibold tracking-tight",
       h4: "scroll-m-20 text-xl font-semibold tracking-tight",
-      p: "leading-7",
+      // p: "leading-7",
+      p: "",
     },
     effect: {
       default: "",
@@ -18,11 +19,12 @@ export const typographyVariants = cva("text-xl", {
       large: "text-lg font-semibold",
       small: "text-sm font-medium leading-none",
       muted: "text-sm text-muted-foreground",
+      tiny: "text-xs text-muted-foreground",
       removePMargin: "[&:not(:first-child)]:mt-0",
     },
   },
   defaultVariants: {
-    variant: "h1",
+    variant: "p",
     effect: "default",
   },
 });

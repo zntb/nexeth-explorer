@@ -1,9 +1,13 @@
 import { FC, PropsWithChildren } from "react";
+import { ClassNameValue } from "tailwind-merge";
 
+import { CommandPalette } from "../command-palette";
 import { Header } from "../navigation";
 import Typography from "../ui/typography";
 
 import { BreadCrumbProps, PageBreadcrumbs } from "./page-breadcrumbs";
+
+import { cn } from "@/lib";
 
 export interface AppLayoutProps {}
 
@@ -17,6 +21,7 @@ export const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
 );
 
 export interface PageContainerProps {
+  className?: ClassNameValue;
   title?: string;
   description?: string;
   showBreadcrumbs?: boolean;
@@ -24,13 +29,16 @@ export interface PageContainerProps {
 }
 
 export const PageContainer: FC<PropsWithChildren<PageContainerProps>> = ({
+  className,
   children,
   title,
   description,
   showBreadcrumbs = true,
   breadcrumbs,
 }) => (
-  <div className="flex flex-col gap-4 w-full max-w-6xl px-4 pt-16">
+  <div
+    className={cn("flex flex-col gap-4 w-full max-w-6xl px-4 pt-16", className)}
+  >
     {showBreadcrumbs && <PageBreadcrumbs breadcrumbs={breadcrumbs} />}
 
     {title && <Typography variant="h1">{title}</Typography>}
@@ -39,6 +47,9 @@ export const PageContainer: FC<PropsWithChildren<PageContainerProps>> = ({
         {description}
       </Typography>
     )}
+
+    <CommandPalette />
+
     {children}
   </div>
 );
