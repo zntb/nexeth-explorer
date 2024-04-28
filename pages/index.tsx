@@ -1,5 +1,9 @@
-import { AppLayout } from "@/components/layouts";
+import { AppLayout, PageContainer } from "@/components/layouts";
 
-const HomePage = () => <AppLayout>Test</AppLayout>;
+const HomePage = () => (
+  <AppLayout>
+    <PageContainer showBreadcrumbs={false}>Test</PageContainer>
+  </AppLayout>
+);
 
 export default HomePage;

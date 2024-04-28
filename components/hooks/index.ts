@@ -4,3 +4,4 @@ export * from "./use-disclosure";
 export * from "./use-is-mobile";
 export * from "./use-query-params";
 export * from "./use-session";
+export * from "./use-path";
