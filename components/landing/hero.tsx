@@ -28,7 +28,7 @@ export const Hero: FC = () => (
       entering an address, transaction hash, token name or ENS to get started.
       Open up the Command Menu at any time with <CommandKeys />
     </Typography>
-    <div className="pt-4 w-full">
+    <div className="pt-4 flex flex-col items-center">
       <CommandSearch label="🔍 Search for a token, address, or transaction" />
     </div>
   </div>

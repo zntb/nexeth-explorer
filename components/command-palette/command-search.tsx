@@ -21,8 +21,13 @@ export const CommandSearch: FC<CommandSearchProps> = ({
   const { onOpen } = useCommandPalette();
 
   return (
-    <div className={cn("flex flex-row items-center gap-2 w-full", className)}>
-      <Input placeholder={label} onClick={onOpen} />
+    <div
+      className={cn(
+        "flex flex-row items-center gap-2 w-full mx-auto",
+        className
+      )}
+    >
+      <Input placeholder={label} onClick={onOpen} className="w-[330px]" />
       {useDesktopOnly(
         <>
           <Typography effect="tiny">or</Typography>

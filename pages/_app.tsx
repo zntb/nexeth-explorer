@@ -11,8 +11,8 @@ import { ThemeProvider } from "@/components/providers";
 import { trpc } from "@/server";
 
 const App = ({ Component, pageProps }: AppProps) => (
-  <ThirdwebProvider {...useProviderConfig()}>
-    <ThemeProvider>
+  <ThemeProvider>
+    <ThirdwebProvider {...useProviderConfig()}>
       <ToastContainer
         position="bottom-left"
         autoClose={4000}
@@ -27,8 +27,8 @@ const App = ({ Component, pageProps }: AppProps) => (
       />
       <PageLoader color="black" />
       <Component {...pageProps} />
-    </ThemeProvider>
-  </ThirdwebProvider>
+    </ThirdwebProvider>
+  </ThemeProvider>
 );
 
 export default trpc.withTRPC(App);

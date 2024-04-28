@@ -1,8 +1,15 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import {
+  useConnect,
+  useDisconnect,
+  useSetIsWalletModalOpen,
+} from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { FC, useMemo } from "react";
+import { FaWallet } from "react-icons/fa";
 
+import { useSession } from "../hooks";
 import { CommandItem } from "../ui/command";
 
 import { useCommandPalette } from "./command-palette-store";
@@ -10,43 +17,57 @@ import { CommandProps, navigationCommands } from "./commands";
 
 export const useCommands = () => {
   const { setTheme } = useTheme();
+  const onWalletOpen = useSetIsWalletModalOpen();
+  const onDisconnect = useDisconnect();
+  const { isConnected } = useSession();
 
-  const navigation = useMemo(
-    () =>
-      navigationCommands.map((command) => (
-        <Command key={command.title} {...command} />
-      )),
-    []
-  );
+  const navigation = navigationCommands.map((command) => (
+    <Command key={command.title} {...command} />
+  ));
 
-  const theme = useMemo(
-    () =>
-      [
-        {
-          title: "Light Theme",
-          icon: <SunIcon />,
-          callback: () => setTheme("light"),
-        },
-        {
-          title: "Dark Theme",
-          icon: <MoonIcon />,
-          callback: () => setTheme("dark"),
-        },
-        {
-          title: "System Theme",
-          icon: <MoonIcon />,
-          callback: () => setTheme("system"),
-        },
-      ].map((command) => <Command key={command.title} {...command} />),
-    [setTheme]
-  );
+  const wallet = (
+    isConnected
+      ? [
+          {
+            title: "Disconnect Wallet",
+            icon: <FaWallet />,
+            callback: () => onDisconnect(),
+          },
+        ]
+      : [
+          {
+            title: "Connect Wallet",
+            icon: <FaWallet />,
+            callback: () => onWalletOpen(true),
+          },
+        ]
+  ).map((command) => <Command key={command.title} {...command} />);
 
-  const all = useMemo(() => [...navigation, ...theme], [navigation, theme]);
+  const theme = [
+    {
+      title: "Light Theme",
+      icon: <SunIcon />,
+      callback: () => setTheme("light"),
+    },
+    {
+      title: "Dark Theme",
+      icon: <MoonIcon />,
+      callback: () => setTheme("dark"),
+    },
+    {
+      title: "System Theme",
+      icon: <MoonIcon />,
+      callback: () => setTheme("system"),
+    },
+  ].map((command) => <Command key={command.title} {...command} />);
+
+  const all = [...navigation, ...theme, wallet];
 
   return {
     navigation,
     theme,
     all,
+    wallet,
   };
 };
 

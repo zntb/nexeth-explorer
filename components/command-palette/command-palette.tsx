@@ -35,6 +35,7 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
       <CommandInput placeholder="Type a command, or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
+        {/* <CommandGroup heading="Wallet">{...wallet}</CommandGroup> */}
         <CommandGroup heading="Navigation">{...navigation}</CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Theme">{...theme}</CommandGroup>

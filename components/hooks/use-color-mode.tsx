@@ -8,6 +8,7 @@ export const useColorModeValue = <T extends string>(light: T, dark: T): T => {
 
 export const useColorMode = () => {
   const { theme } = useTheme();
+  console.log(useTheme());
 
   return {
     colorMode: theme,
