@@ -1,6 +1,34 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import "react-toastify/dist/ReactToastify.css";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
-}
+import { ThirdwebProvider } from "@thirdweb-dev/react";
+import type { AppProps } from "next/app";
+import PageLoader from "nextjs-progressbar";
+import { ToastContainer } from "react-toastify";
+
+import { useProviderConfig } from "@/components/hooks";
+import { ThemeProvider } from "@/components/providers";
+import { trpc } from "@/server";
+
+const App = ({ Component, pageProps }: AppProps) => (
+  <ThirdwebProvider {...useProviderConfig()}>
+    <ThemeProvider>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={4000}
+        hideProgressBar={false}
+        newestOnTop
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss={false}
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
+      <PageLoader color="black" />
+      <Component {...pageProps} />
+    </ThemeProvider>
+  </ThirdwebProvider>
+);
+
+export default trpc.withTRPC(App);
