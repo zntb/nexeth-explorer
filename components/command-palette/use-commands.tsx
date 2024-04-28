@@ -1,12 +1,8 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import {
-  useConnect,
-  useDisconnect,
-  useSetIsWalletModalOpen,
-} from "@thirdweb-dev/react";
+import { useDisconnect, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
-import { FC, useMemo } from "react";
+import { FC } from "react";
 import { FaWallet } from "react-icons/fa";
 
 import { useSession } from "../hooks";
