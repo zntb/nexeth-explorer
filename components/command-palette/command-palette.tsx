@@ -16,7 +16,7 @@ export interface CommandPaletteProps {}
 
 export const CommandPalette: FC<CommandPaletteProps> = () => {
   const { isOpen, setIsOpen, onOpen } = useCommandPalette();
-  const { navigation, theme } = useCommands();
+  const { navigation, theme, test } = useCommands();
 
   // Handle cmd + k keyboard event
   useEffect(() => {
@@ -36,6 +36,8 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         {/* <CommandGroup heading="Wallet">{...wallet}</CommandGroup> */}
+        <CommandGroup heading="Test">{...test}</CommandGroup>
+        <CommandSeparator />
         <CommandGroup heading="Navigation">{...navigation}</CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Theme">{...theme}</CommandGroup>

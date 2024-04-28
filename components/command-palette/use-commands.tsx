@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { FC } from "react";
 import { FaWallet } from "react-icons/fa";
+import { PiTestTubeDuotone } from "react-icons/pi";
 
 import { useSession } from "../hooks";
 import { CommandItem } from "../ui/command";
@@ -39,6 +40,19 @@ export const useCommands = () => {
         ]
   ).map((command) => <Command key={command.title} {...command} />);
 
+  const test = [
+    {
+      title: "Test Block #19754226",
+      icon: <PiTestTubeDuotone />,
+      href: "/block/ethereum/19754226",
+    },
+    {
+      title: "Test Transaction 0xaf3fea...fda17333",
+      icon: <PiTestTubeDuotone />,
+      href: "/tx/ethereum/0xaf3feac62a57297724efcd67142b598131dbf74c2955d4f81333fb09fda17333",
+    },
+  ].map((command) => <Command key={command.title} {...command} />);
+
   const theme = [
     {
       title: "Light Theme",
@@ -57,13 +71,11 @@ export const useCommands = () => {
     },
   ].map((command) => <Command key={command.title} {...command} />);
 
-  const all = [...navigation, ...theme, wallet];
-
   return {
     navigation,
     theme,
-    all,
     wallet,
+    test,
   };
 };
 
