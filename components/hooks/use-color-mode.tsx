@@ -5,3 +5,13 @@ export const useColorModeValue = <T extends string>(light: T, dark: T): T => {
 
   return theme === "dark" ? dark : light;
 };
+
+export const useColorMode = () => {
+  const { theme } = useTheme();
+
+  return {
+    colorMode: theme,
+    isDark: theme === "dark",
+    isLight: theme === "light",
+  };
+};

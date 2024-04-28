@@ -28,6 +28,6 @@ const requestLogger = t.middleware((opts) => {
   return opts.next(opts);
 });
 
-export const { router } = t;
+export const { router, createCallerFactory } = t;
 export const procedure = t.procedure.use(requestLogger).use(maintenanceMode);
 export const protectedProcedure = procedure.use(requireAuth);

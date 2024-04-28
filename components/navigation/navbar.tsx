@@ -47,7 +47,7 @@ const DesktopNavbar = () => (
               </NavigationMenuContent>
             </>
           ) : (
-            <Link href="/" legacyBehavior passHref>
+            <Link href={item.href} legacyBehavior passHref>
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
                 {item.label}
               </NavigationMenuLink>
@@ -100,7 +100,7 @@ const MobileNavbar = () => {
                 </Accordion>
               ) : (
                 <NavigationMenuItem key={item.href} className="">
-                  <Link href="/" legacyBehavior passHref>
+                  <Link href={item.href} legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}
                     >

@@ -6,15 +6,16 @@ import {
   CommandList,
   CommandEmpty,
   CommandGroup,
-  CommandItem,
 } from "../ui/command";
 
 import { useCommandPalette } from "./command-palette-store";
+import { useCommands } from "./use-commands";
 
 export interface CommandPaletteProps {}
 
 export const CommandPalette: FC<CommandPaletteProps> = () => {
   const { isOpen, setIsOpen, onOpen } = useCommandPalette();
+  const { navigation, theme } = useCommands();
 
   // Handle cmd + k keyboard event
   useEffect(() => {
@@ -33,11 +34,8 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
       <CommandInput placeholder="Type a command, or search..." />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        <CommandGroup heading="Suggestions">
-          <CommandItem>Calendar</CommandItem>
-          <CommandItem>Search Emoji</CommandItem>
-          <CommandItem>Calculator</CommandItem>
-        </CommandGroup>
+        <CommandGroup heading="Navigation">{...navigation}</CommandGroup>
+        <CommandGroup heading="Theme">{...theme}</CommandGroup>
       </CommandList>
     </CommandDialog>
   );

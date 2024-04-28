@@ -1,4 +1,4 @@
-import { router, procedure } from "../router";
+import { procedure, router } from "../router-procedures";
 
 import { getHealthResponseSchema } from "@/server";
 

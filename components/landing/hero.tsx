@@ -8,6 +8,7 @@ export const Hero: FC = () => (
     <Typography variant="h1" className="text-[80px]">
       Nexeth
     </Typography>
+
     <Typography variant="h3" className="font-light">
       Explore Ethereum at the{" "}
       <span className="font-bold">Speed of Thought</span>

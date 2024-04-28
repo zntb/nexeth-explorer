@@ -1,7 +1,7 @@
 import { AuthContext } from "../context";
 import { UserModel } from "../database/models";
 import { BadRequestError, NotFoundError } from "../errors";
-import { router, protectedProcedure } from "../router";
+import { router, protectedProcedure } from "../router-procedures";
 
 import {
   getSessionResponseSchema,

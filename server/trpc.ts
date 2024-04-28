@@ -3,7 +3,7 @@ import { createTRPCNext } from "@trpc/next";
 import { httpLink, splitLink } from "@trpc/react-query";
 import SuperJSON from "superjson";
 
-import { AppRouter } from "./routers/_app";
+import { AppRouter } from "./routers/router";
 
 import { VERCEL_URL } from "@/lib";
 
