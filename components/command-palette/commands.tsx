@@ -1,6 +1,8 @@
 import { DashboardIcon, HomeIcon } from "@radix-ui/react-icons";
 import { FaEthereum } from "react-icons/fa";
 
+import { supportedChainsAndTestnets } from "@/lib";
+
 export interface CommandProps {
   title: string;
   icon: JSX.Element;
@@ -24,4 +26,9 @@ export const navigationCommands: CommandProps[] = [
     href: "/chains",
     icon: <FaEthereum />,
   },
+  ...supportedChainsAndTestnets.map((chain) => ({
+    title: `Chains / ${chain.name}`,
+    href: `/chains/${chain.slug}`,
+    icon: <FaEthereum />,
+  })),
 ];
