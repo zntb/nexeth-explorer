@@ -14,7 +14,6 @@ import { useDesktopOnly } from "../hooks";
 import { nexethLogoTransparent } from "../images";
 import { WalletButton } from "../wallet/wallet-button";
 
-import { ColorModeButton } from "./color-mode-button";
 import { Navbar } from "./navbar";
 
 export interface HeaderProps {}
@@ -34,9 +33,9 @@ export const Header: FC<HeaderProps> = () => (
       <Navbar />
     </div>
     <div className="flex flex-row items-center gap-2">
-      <CommandSearch className="w-[160px] flex-row-reverse" />
+      <CommandSearch className="w-[160px] md:w-[250px] flex-row-reverse" />
       <WalletButton />
-      <ColorModeButton />
+      {/* <ColorModeButton /> */}
       {/* <ProfileModal /> */}
     </div>
   </div>

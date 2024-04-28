@@ -13,19 +13,6 @@ export enum DashboardTag {
   AccountAbstraction = "Account Abstraction",
 }
 
-export const dashboardTagColor: Record<DashboardTag, string> = {
-  [DashboardTag.Layer2]: "pink",
-  [DashboardTag.General]: "cyan",
-  [DashboardTag.EcosystemHealth]: "green",
-  [DashboardTag.Staking]: "red",
-  [DashboardTag.MonetaryPolicy]: "yellow",
-  [DashboardTag.DeFi]: "teal",
-  [DashboardTag.MEV]: "blue",
-  [DashboardTag.DuneAnalytics]: "purple",
-  [DashboardTag.NFTs]: "pink",
-  [DashboardTag.AccountAbstraction]: "orange",
-};
-
 export const dashboardSchema = z.object({
   name: z.string(),
   description: z.string(),

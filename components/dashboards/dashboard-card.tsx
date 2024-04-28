@@ -25,9 +25,8 @@ export const DashboardCard: FC<DashboardCardProps> = ({
           <Image
             src={image}
             alt={name}
-            width={300}
-            height={160}
             className="object-cover"
+            layout="fill"
           />
         </AspectRatio>
 

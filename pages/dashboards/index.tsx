@@ -2,7 +2,7 @@ import { createServerSideHelpers } from "@trpc/react-query/server";
 import { InferGetStaticPropsType } from "next";
 import SuperJSON from "superjson";
 
-import { DashboardCard } from "@/components/dashboards";
+import { DashboardSearch } from "@/components/dashboards/dashboard-search";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { appRouter } from "@/server/routers/router";
 
@@ -16,11 +16,7 @@ const DashboardsPage = ({
       description="All of your favourite Ethereum Dashboards in one place. Thanks to Superphiz for getting this started!"
       breadcrumbs={[{ name: "Dashboards", href: "/dashboards" }]}
     >
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {dashboards.map((dashboard) => (
-          <DashboardCard key={dashboard.name} dashboard={dashboard} />
-        ))}
-      </div>
+      <DashboardSearch dashboards={dashboards} />
     </PageContainer>
   </AppLayout>
 );
