@@ -9,10 +9,19 @@ export const Hero: FC = () => (
       Nexeth
     </Typography>
 
-    <Typography variant="h3" className="font-light">
+    {/* <Typography variant="h3" className="font-light">
       Explore Ethereum at the{" "}
       <span className="font-bold">Speed of Thought</span>
-    </Typography>
+    </Typography> */}
+    <div className="flex flex-col md:flex-row items-center gap-1">
+      <Typography variant="h3" className="font-light">
+        Blockchain Explorer.
+      </Typography>
+      <Typography variant="h3" className="font-light">
+        <span className="font-bold">⚡️ Supercharged ⚡️</span>
+      </Typography>
+    </div>
+
     <Typography effect="tiny">
       Nexeth unifies your search across Ethereum and L2s. Explore networks,
       tokens, NFTs, and transactions – all from a single powerful interface. Try
