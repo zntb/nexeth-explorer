@@ -99,7 +99,7 @@ const MobileNavbar = () => {
                   </AccordionItem>
                 </Accordion>
               ) : (
-                <NavigationMenuItem key={item.href} className="">
+                <NavigationMenuItem key={item.href}>
                   <Link href={item.href} legacyBehavior passHref>
                     <NavigationMenuLink
                       className={navigationMenuTriggerStyle()}

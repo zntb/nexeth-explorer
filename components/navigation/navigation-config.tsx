@@ -30,6 +30,10 @@ export const navigationConfig: NavigationItem[] = [
   //   ],
   // },
   {
+    label: "Chains",
+    href: "/chains",
+  },
+  {
     label: "Dashboards",
     href: "/dashboards",
   },

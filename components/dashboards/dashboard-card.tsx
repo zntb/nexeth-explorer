@@ -16,7 +16,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
   dashboard: { name, description, tags, image, url },
 }) => (
   <Link href={url} target="_blank">
-    <Card className="h-full">
+    <Card className="h-full hover:shadow-xl">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium">{name}</CardTitle>
       </CardHeader>

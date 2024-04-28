@@ -1,4 +1,5 @@
 import { DashboardIcon, HomeIcon } from "@radix-ui/react-icons";
+import { FaEthereum } from "react-icons/fa";
 
 export interface CommandProps {
   title: string;
@@ -17,5 +18,10 @@ export const navigationCommands: CommandProps[] = [
     title: "Dashboards",
     href: "/dashboards",
     icon: <DashboardIcon />,
+  },
+  {
+    title: "Chains",
+    href: "/chains",
+    icon: <FaEthereum />,
   },
 ];
