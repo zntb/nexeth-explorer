@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/breadcrumb";
 
 export interface BreadCrumbProps {
-  name: string;
+  name: string | number;
   href: string;
 }
 

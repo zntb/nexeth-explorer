@@ -1,3 +1,4 @@
+import { Block } from "@ethersproject/abstract-provider";
 import { Transaction } from "ethers";
 import { z } from "zod";
 
@@ -13,3 +14,13 @@ export const getTransactionResponseSchema = z.object({
 export type GetTransactionResponse = z.infer<
   typeof getTransactionResponseSchema
 >;
+
+export const getBlockRequestSchema = z.object({
+  chain: z.string(),
+  blockNumber: z.coerce.number(),
+});
+export type GetBlockRequest = z.infer<typeof getBlockRequestSchema>;
+export const getBlockResponseSchema = z.object({
+  block: z.custom<Block>(),
+});
+export type GetBlockResponse = z.infer<typeof getBlockResponseSchema>;
