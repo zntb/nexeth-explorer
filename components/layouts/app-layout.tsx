@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, ReactNode } from "react";
 import { ClassNameValue } from "tailwind-merge";
 
 import { CommandPalette } from "../command-palette";
@@ -22,8 +22,8 @@ export const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
 
 export interface PageContainerProps {
   className?: ClassNameValue;
-  title?: string;
-  description?: string;
+  title?: ReactNode;
+  description?: ReactNode;
   showBreadcrumbs?: boolean;
   breadcrumbs?: BreadCrumbProps[];
 }

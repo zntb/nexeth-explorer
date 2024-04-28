@@ -12,7 +12,6 @@ import React from "react";
 import { CommandSearch } from "../command-palette";
 import { useDesktopOnly } from "../hooks";
 import { nexethLogoTransparent } from "../images";
-import { WalletButton } from "../wallet/wallet-button";
 
 import { Navbar } from "./navbar";
 
@@ -34,7 +33,7 @@ export const Header: FC<HeaderProps> = () => (
     </div>
     <div className="flex flex-row items-center gap-2">
       <CommandSearch className="w-[160px] md:w-[250px] flex-row-reverse" />
-      <WalletButton />
+      {/* <WalletButton /> */}
       {/* <ColorModeButton /> */}
       {/* <ProfileModal /> */}
     </div>

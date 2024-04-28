@@ -1,5 +1,6 @@
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { InferGetStaticPropsType } from "next";
+import Link from "next/link";
 import SuperJSON from "superjson";
 
 import { DashboardSearch } from "@/components/dashboards/dashboard-search";
@@ -13,7 +14,28 @@ const DashboardsPage = ({
     <PageContainer
       className="pb-8"
       title="Dashboards"
-      description="All of your favourite Ethereum Dashboards in one place. Thanks to Superphiz for getting this started!"
+      description={
+        <>
+          All of your favourite Ethereum Dashboards in one place. Originally{" "}
+          <Link
+            className="underline text-blue-500"
+            href="https://www.ethdash.xyz/"
+            target="_blank"
+          >
+            ethdash.xyz
+          </Link>
+          {". "}
+          Thanks to{" "}
+          <Link
+            className="underline text-blue-500"
+            href="https://github.com/superphiz/dashboards"
+            target="_blank"
+          >
+            Superphiz
+          </Link>{" "}
+          for getting this started!
+        </>
+      }
       breadcrumbs={[{ name: "Dashboards", href: "/dashboards" }]}
     >
       <DashboardSearch dashboards={dashboards} />
