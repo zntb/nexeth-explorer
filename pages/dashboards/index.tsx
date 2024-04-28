@@ -28,13 +28,13 @@ const DashboardsPage = ({
 export default DashboardsPage;
 
 export const getStaticProps = async () => {
-  const helpers = createServerSideHelpers({
+  const router = createServerSideHelpers({
     router: appRouter,
     ctx: {},
     transformer: SuperJSON,
   });
 
-  const { dashboards } = await helpers.dashboard.get.fetch();
+  const { dashboards } = await router.dashboard.get.fetch();
 
   return {
     props: {

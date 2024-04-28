@@ -6,6 +6,7 @@ import {
   CommandList,
   CommandEmpty,
   CommandGroup,
+  CommandSeparator,
 } from "../ui/command";
 
 import { useCommandPalette } from "./command-palette-store";
@@ -35,6 +36,7 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
         <CommandGroup heading="Navigation">{...navigation}</CommandGroup>
+        <CommandSeparator />
         <CommandGroup heading="Theme">{...theme}</CommandGroup>
       </CommandList>
     </CommandDialog>
