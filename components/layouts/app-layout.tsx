@@ -37,7 +37,10 @@ export const PageContainer: FC<PropsWithChildren<PageContainerProps>> = ({
   breadcrumbs,
 }) => (
   <div
-    className={cn("flex flex-col gap-4 w-full max-w-6xl px-4 pt-20", className)}
+    className={cn(
+      "flex flex-col gap-4 w-full max-w-6xl px-4 pt-20 pb-8",
+      className
+    )}
   >
     {showBreadcrumbs && <PageBreadcrumbs breadcrumbs={breadcrumbs} />}
 

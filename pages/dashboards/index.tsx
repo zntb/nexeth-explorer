@@ -12,7 +12,6 @@ const DashboardsPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <AppLayout>
     <PageContainer
-      className="pb-8"
       title="Dashboards"
       description={
         <>

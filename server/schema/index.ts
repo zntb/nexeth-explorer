@@ -4,3 +4,4 @@ export * from "./pagination.schema";
 export * from "./address.schema";
 export * from "./dashboard.schema";
 export * from "./chain.schema";
+export * from "./transaction.schema";

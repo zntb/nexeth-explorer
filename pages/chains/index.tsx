@@ -12,7 +12,6 @@ const ChainsPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <AppLayout>
     <PageContainer
-      className="pb-8"
       title="Chains"
       description="Your journey through the world of Ethereum chains starts here. Compare transaction speeds, fees, and features. Find the best chain for your DeFi adventures, NFT purchases, and more."
       breadcrumbs={[{ name: "Chains", href: "/chains" }]}

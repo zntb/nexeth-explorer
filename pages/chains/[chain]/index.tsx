@@ -12,7 +12,6 @@ const ChainPage = ({
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <AppLayout>
     <PageContainer
-      className="pb-8"
       title={chain.name}
       breadcrumbs={[
         { name: "Chains", href: "/chains" },
