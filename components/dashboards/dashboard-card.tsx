@@ -22,12 +22,7 @@ export const DashboardCard: FC<DashboardCardProps> = ({
       </CardHeader>
       <CardContent>
         <AspectRatio ratio={16 / 9} className="mb-2 rounded-md overflow-hidden">
-          <Image
-            src={image}
-            alt={name}
-            className="object-cover"
-            layout="fill"
-          />
+          <Image src={image} alt={name} className="object-cover" fill />
         </AspectRatio>
 
         {tags.map((tag) => (

@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { CommandSearch } from "../command-palette/command-search";
+import { CommandKeys, CommandSearch } from "../command-palette/command-search";
 import Typography from "../ui/typography";
 
 export const Hero: FC = () => (
@@ -14,9 +14,10 @@ export const Hero: FC = () => (
       <span className="font-bold">Speed of Thought</span>
     </Typography>
     <Typography effect="tiny">
-      Nexeth allows you to explore all things Ethereum and L2s in one powerful
-      search. Try entering an address, transaction hash, token name or ENS to
-      get started.
+      Nexeth unifies your search across Ethereum and L2s. Explore networks,
+      tokens, NFTs, and transactions – all from a single powerful interface. Try
+      entering an address, transaction hash, token name or ENS to get started.
+      Open up the Command Menu at any time with <CommandKeys />
     </Typography>
     <div className="pt-4 w-full">
       <CommandSearch label="🔍 Search for a token, address, or transaction" />
