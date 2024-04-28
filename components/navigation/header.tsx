@@ -11,6 +11,7 @@ import React from "react";
 import { CommandSearch } from "../command-palette";
 import { WalletButton } from "../wallet/wallet-button";
 
+import { ColorModeButton } from "./color-mode-button";
 import { Navbar } from "./navbar";
 
 export interface HeaderProps {}
@@ -23,6 +24,7 @@ export const Header: FC<HeaderProps> = () => (
     </div>
     <div className="flex flex-row items-center gap-2">
       <WalletButton />
+      <ColorModeButton />
       {/* <ProfileModal /> */}
     </div>
   </div>

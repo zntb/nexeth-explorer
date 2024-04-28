@@ -19,6 +19,7 @@ export const WalletButton = () => {
       style={{
         height: "36px",
         fontSize: "14px",
+        borderRadius: "6px",
       }}
       switchToActiveChain
       detailsBtn={() => (

@@ -8,8 +8,9 @@ export const Hero: FC = () => (
     <Typography variant="h1" className="text-[80px]">
       Nexeth
     </Typography>
-    <Typography variant="h3">
-      Explore Ethereum at the Speed of Thought
+    <Typography variant="h3" className="font-light">
+      Explore Ethereum at the{" "}
+      <span className="font-bold">Speed of Thought</span>
     </Typography>
     <Typography effect="tiny">
       Nexeth allows you to explore all things Ethereum and L2s in one powerful
