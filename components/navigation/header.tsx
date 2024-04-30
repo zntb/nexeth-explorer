@@ -13,6 +13,7 @@ import { CommandSearch } from "../command-palette";
 import { useDesktopOnly } from "../hooks";
 import { nexethLogoTransparent } from "../images";
 
+import { EthPrice } from "./eth-price";
 import { Navbar } from "./navbar";
 
 export interface HeaderProps {}
@@ -32,6 +33,7 @@ export const Header: FC<HeaderProps> = () => (
       <Navbar />
     </div>
     <div className="flex flex-row items-center gap-2">
+      <EthPrice />
       <CommandSearch className="w-[160px] md:w-[250px] flex-row-reverse" />
       {/* <WalletButton /> */}
       {/* <ColorModeButton /> */}

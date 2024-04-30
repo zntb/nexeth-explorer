@@ -21,7 +21,7 @@ const TransactionPage = ({
         { name: shortenString(transaction.hash), href: "" },
       ]}
     >
-      <TransactionDetailsTable transaction={transaction} />
+      <TransactionDetailsTable transaction={transaction} chain={chain} />
     </PageContainer>
   </AppLayout>
 );
