@@ -9,11 +9,11 @@ import { KeyValueTable } from "../ui/key-value-table";
 import Typography from "../ui/typography";
 
 import { createBlockLink, toTitleCase } from "@/lib";
-import { Block } from "@/server";
+import { Block, BlockWithTransactions } from "@/server";
 
 export interface BlockDetailsTableProps {
   chain: string;
-  block: Block;
+  block: Block | BlockWithTransactions;
 }
 
 export const BlockDetailsTable: FC<BlockDetailsTableProps> = ({

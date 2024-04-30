@@ -3,8 +3,10 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
 import { BlockDetailsTable } from "@/components/blocks";
+import { BlockTabs } from "@/components/blocks/block-tabs";
 import { BlockTimeline } from "@/components/blocks/block-timeline";
 import { AppLayout, PageContainer } from "@/components/layouts";
+import { Separator } from "@/components/ui/separator";
 import { propsParser } from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getBlockRequestSchema } from "@/server";
@@ -29,6 +31,8 @@ const BlockPage = ({
         chain={chain}
       />
       <BlockDetailsTable block={block} chain={chain} />
+      <Separator />
+      <BlockTabs block={block} chain={chain} />
     </PageContainer>
   </AppLayout>
 );
