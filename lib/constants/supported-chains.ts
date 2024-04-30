@@ -10,8 +10,8 @@ import {
   Polygon,
   PolygonAmoyTestnet,
   PolygonZkevm,
-  ImmutableZkevm,
-  ImmutableZkevmTestnet,
+  // ImmutableZkevm,
+  // ImmutableZkevmTestnet,
   Chain,
 } from "@thirdweb-dev/chains";
 
@@ -22,14 +22,14 @@ export const supportedChains = [
   Base,
   Polygon,
   PolygonZkevm,
-  ImmutableZkevm,
+  // ImmutableZkevm,
 ] as Chain[];
 
 export const supportedTestnets = [
   Sepolia,
   Holesky,
   PolygonAmoyTestnet,
-  ImmutableZkevmTestnet,
+  // ImmutableZkevmTestnet,
   OpSepoliaTestnet,
   BaseSepoliaTestnet,
 ] as Chain[];

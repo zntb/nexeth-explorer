@@ -1,6 +1,9 @@
-import { Block } from "@ethersproject/abstract-provider";
+import { Block as EthersBlock } from "@ethersproject/abstract-provider";
 import { Transaction } from "ethers";
 import { z } from "zod";
+
+export const blockSchema = z.custom<EthersBlock>();
+export type Block = z.infer<typeof blockSchema>;
 
 export const getTransactionRequestSchema = z.object({
   chain: z.string(),
@@ -21,6 +24,7 @@ export const getBlockRequestSchema = z.object({
 });
 export type GetBlockRequest = z.infer<typeof getBlockRequestSchema>;
 export const getBlockResponseSchema = z.object({
-  block: z.custom<Block>(),
+  block: z.custom<EthersBlock>(),
+  latestBlock: z.custom<EthersBlock>(),
 });
 export type GetBlockResponse = z.infer<typeof getBlockResponseSchema>;

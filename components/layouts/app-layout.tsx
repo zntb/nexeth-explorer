@@ -17,6 +17,7 @@ export const AppLayout: FC<PropsWithChildren<AppLayoutProps>> = ({
   <div className="flex min-h-screen flex-col items-center">
     <Header />
     {children}
+    <CommandPalette />
   </div>
 );
 
@@ -50,8 +51,6 @@ export const PageContainer: FC<PropsWithChildren<PageContainerProps>> = ({
         {description}
       </Typography>
     )}
-
-    <CommandPalette />
 
     {children}
   </div>

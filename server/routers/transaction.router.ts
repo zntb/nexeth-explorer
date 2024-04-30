@@ -1,4 +1,4 @@
-import { getChainProvider } from "@thirdweb-dev/sdk";
+import { getBlock, getChainProvider } from "@thirdweb-dev/sdk";
 
 import { procedure, router } from "../router-procedures";
 import {
@@ -23,9 +23,16 @@ export const transactionRouter = router({
     .input(getBlockRequestSchema)
     .output(getBlockResponseSchema)
     .query(async ({ input }) => {
-      const provider = getChainProvider(input.chain, {});
+      const block = await getBlock({
+        network: input.chain,
+        block: input.blockNumber,
+      });
 
-      const block = await provider.getBlock(input.blockNumber);
-      return { block };
+      const latestBlock = await getBlock({
+        network: input.chain,
+        block: "latest",
+      });
+
+      return { block, latestBlock };
     }),
 });

@@ -2,6 +2,8 @@ import { createServerSideHelpers } from "@trpc/react-query/server";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
+import { BlockDetailsTable } from "@/components/blocks";
+import { BlockTimeline } from "@/components/blocks/block-timeline";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { propsParser } from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
@@ -11,16 +13,22 @@ import { appRouter } from "@/server/routers/router";
 const BlockPage = ({
   chain,
   block,
+  latestBlock,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => (
   <AppLayout>
     <PageContainer
-      title={`Block #${block.number}`}
+      title={`#${block.number}`}
       breadcrumbs={[
         { name: toTitleCase(chain), href: `/chains/${chain}` },
-        { name: block.number, href: "" },
+        { name: `Block #${block.number}`, href: "" },
       ]}
     >
-      {JSON.stringify(block, null, 2)}
+      <BlockTimeline
+        selectedBlock={block}
+        latestBlock={latestBlock}
+        chain={chain}
+      />
+      <BlockDetailsTable block={block} chain={chain} />
     </PageContainer>
   </AppLayout>
 );
@@ -36,7 +44,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     transformer: SuperJSON,
   });
 
-  const { block } = await router.transaction.getBlock.fetch({
+  const { block, latestBlock } = await router.transaction.getBlock.fetch({
     chain,
     blockNumber,
   });
@@ -50,6 +58,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: propsParser({
       block,
+      latestBlock,
       chain,
     }),
   };

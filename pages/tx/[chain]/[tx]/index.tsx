@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
 import { AppLayout, PageContainer } from "@/components/layouts";
+import { TransactionDetailsTable } from "@/components/transactions";
 import { propsParser, shortenString } from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getTransactionRequestSchema } from "@/server";
@@ -20,7 +21,7 @@ const TransactionPage = ({
         { name: shortenString(transaction.hash), href: "" },
       ]}
     >
-      {JSON.stringify(transaction, null, 2)}
+      <TransactionDetailsTable transaction={transaction} />
     </PageContainer>
   </AppLayout>
 );

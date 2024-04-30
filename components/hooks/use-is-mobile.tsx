@@ -27,10 +27,10 @@ export const useDesktopOnly = (node: ReactNode) => {
   return isMobile ? null : node;
 };
 
-export const useMobileDesktop = (
-  mobileNode: ReactNode,
-  desktopNode: ReactNode
-) => {
+export const useMobileDesktop = <T extends ReactNode | object>(
+  mobileNode: T,
+  desktopNode: T
+): T => {
   const isMobile = useIsMobile();
   return isMobile ? mobileNode : desktopNode;
 };
