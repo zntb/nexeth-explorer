@@ -13,11 +13,15 @@ export const getNetworkStatsRequestSchema = z.object({
 export type GetNetworkStatsRequest = z.infer<
   typeof getNetworkStatsRequestSchema
 >;
+
+export const ethPriceSchema = z.object({
+  usd: z.number(),
+});
+export type EthPrice = z.infer<typeof ethPriceSchema>;
+
 export const getNetworkStatsResponseSchema = z.object({
   gasPrice: z.number(),
-  ethPrice: z.object({
-    usd: z.number(),
-  }),
+  ethPrice: ethPriceSchema,
 });
 export type GetNetworkStatsResponse = z.infer<
   typeof getNetworkStatsResponseSchema

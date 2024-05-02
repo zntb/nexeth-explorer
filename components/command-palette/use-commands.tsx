@@ -1,9 +1,10 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useDisconnect, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
+import { isAddress } from "ethers/lib/utils";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
 import { FC, useMemo } from "react";
-import { FaSearch, FaWallet } from "react-icons/fa";
+import { FaGlobe, FaWallet } from "react-icons/fa";
 
 import { useSession } from "../hooks";
 import { CommandItem } from "../ui/command";
@@ -12,6 +13,7 @@ import { Skeleton } from "../ui/skeleton";
 import { useCommandPaletteStore as useCommandPalette } from "./command-palette-store";
 import { CommandProps, navigationCommands } from "./commands";
 
+import { isTransactionHash } from "@/lib";
 import { trpc } from "@/server";
 
 export const useCommands = () => {
@@ -21,14 +23,23 @@ export const useCommands = () => {
   const { isConnected } = useSession();
   const { query } = useCommandPalette();
 
+  const isSearchable = useMemo(
+    () => isAddress(query) || isTransactionHash(query),
+    [query]
+  );
+
   const { data = { results: [] }, isFetching } = trpc.search.get.useQuery(
     { query },
-    { keepPreviousData: false }
+    {
+      keepPreviousData: false,
+      enabled: isSearchable,
+    }
   );
 
   const navigation = useMemo(() => toCommands(navigationCommands), []);
 
   const search = useMemo(() => {
+    if (!isSearchable) return [];
     if (isFetching) {
       return [
         <CommandItem key="loading-search-results" value={query}>
@@ -41,17 +52,16 @@ export const useCommands = () => {
         data.results.map((result) => ({
           title: result.title,
           href: result.href,
-          icon: <FaSearch />,
+          icon: <FaGlobe />,
         }))
       );
     }
-
     return [
       <CommandItem key="loading-search-results" value={query}>
         No results found.
       </CommandItem>,
     ];
-  }, [data.results, isFetching, query]);
+  }, [data.results, isFetching, isSearchable, query]);
 
   const wallet = useMemo(
     () =>

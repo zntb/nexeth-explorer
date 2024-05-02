@@ -7,7 +7,11 @@ import {
   getNetworkStatsResponseSchema,
 } from "../schema/chain.schema";
 
-import { supportedChains, supportedTestnets } from "@/lib";
+import {
+  EthereumPriceService,
+  supportedChains,
+  supportedTestnets,
+} from "@/lib";
 
 export const chainRouter = router({
   getChains: procedure.output(getChainsResponseSchema).query(() =>
@@ -23,14 +27,9 @@ export const chainRouter = router({
     .query(async ({ input }) => {
       const { chain } = input;
 
-      const provider = getChainProvider(chain, {});
-      const gasPrice = (await provider.getGasPrice()).div(1e9).toNumber();
-      // const ethPrice = await fetch(
-      //   "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
-      // )
-      //   .then((res) => res.json())
-      //   .then((res) => res.ethereum);
-      const ethPrice = { usd: 2000.0 };
+      const ethPriceService = new EthereumPriceService();
+      const gasPrice = await ethPriceService.getGasPrice(chain);
+      const ethPrice = await ethPriceService.getEthPrice();
 
       return { gasPrice, ethPrice };
     }),

@@ -23,6 +23,10 @@ export type AuthContext = {
 export const createAuthContext = async ({
   req,
 }: trpcNext.CreateNextContextOptions): Promise<AuthContext> => {
+  return {
+    session: undefined,
+  };
+
   await connect(); // TODO: see if we can find a way to only use this context on authenticated routes to prevent excessive DB connections
 
   const session = (await thirdWebService().getUser(req)) as AuthSession;

@@ -6,3 +6,4 @@ export * from "./use-query-params";
 export * from "./use-session";
 export * from "./use-path";
 export * from "./use-query-store-sync";
+export * from "./use-eth-price";

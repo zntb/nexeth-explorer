@@ -1,5 +1,5 @@
 import { Transaction } from "ethers";
-import { formatEther } from "ethers/lib/utils";
+import { formatEther, formatUnits } from "ethers/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
 
@@ -34,8 +34,8 @@ export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
           To: transaction.to,
           Data: shortenString(transaction.data),
           Value: formatEther(transaction.value),
-          Gas: formatEther(transaction.gasLimit),
-          GasPrice: formatEther(transaction.gasPrice ?? 0),
+          "Gas Price": `${formatUnits(transaction.gasPrice ?? 0, "gwei")} Gwei`,
+          "Gas Limit": `${formatUnits(transaction.gasLimit, "wei")} wei`,
           Nonce: transaction.nonce,
         }}
       />

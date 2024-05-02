@@ -33,6 +33,7 @@
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
     "@typegoose/typegoose": "^12.4.0",
+    "@upstash/redis": "^1.30.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "cmdk": "^1.0.0",

@@ -1,17 +1,14 @@
 import { FaEthereum, FaGasPump } from "react-icons/fa";
 
+import { useEthPrice } from "../hooks";
 import { Card } from "../ui/card";
 import { Separator } from "../ui/separator";
 import { Skeleton } from "../ui/skeleton";
 import Typography from "../ui/typography";
 
-import { trpc } from "@/server";
-
 export const EthPrice = () => {
-  const { data = { gasPrice: 0, ethPrice: { usd: 0 } }, isLoading } =
-    trpc.chains.getNetworkStats.useQuery({
-      chain: "ethereum",
-    });
+  const { data = { ethPrice: { usd: 0 }, gasPrice: 0 }, isLoading } =
+    useEthPrice();
 
   return (
     <Card>
