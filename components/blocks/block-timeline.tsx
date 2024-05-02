@@ -5,11 +5,11 @@ import { useMobileDesktop } from "../hooks";
 import { Card } from "../ui/card";
 
 import { createBlockLink } from "@/lib";
-import { Block, BlockWithTransactions } from "@/server";
+import { Block } from "@/server";
 
 export interface BlockTimelineProps {
-  latestBlock: Block | BlockWithTransactions;
-  selectedBlock: Block | BlockWithTransactions;
+  latestBlock: Block;
+  selectedBlock: Block;
   chain: string;
 }
 

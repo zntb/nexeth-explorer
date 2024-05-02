@@ -21,11 +21,10 @@ export const useCommands = () => {
   const { isConnected } = useSession();
   const { query } = useCommandPalette();
 
-  const {
-    data = { results: [] },
-    isFetching,
-    isLoading,
-  } = trpc.search.get.useQuery({ query }, { keepPreviousData: false });
+  const { data = { results: [] }, isFetching } = trpc.search.get.useQuery(
+    { query },
+    { keepPreviousData: false }
+  );
 
   const navigation = useMemo(() => toCommands(navigationCommands), []);
 
@@ -55,18 +54,7 @@ export const useCommands = () => {
         No results found.
       </CommandItem>,
     ];
-  }, [data.results, isFetching, isLoading, query]);
-
-  // const search =
-  //   isFetching || isLoading
-  //     ? [<CommandLoading key="loading-search-results" />]
-  //     : toCommands(
-  //         data.results.map((result) => ({
-  //           title: result.title,
-  //           href: result.href,
-  //           icon: <FaSearch />,
-  //         }))
-  //       );
+  }, [data.results, isFetching, query]);
 
   const wallet = useMemo(
     () =>
