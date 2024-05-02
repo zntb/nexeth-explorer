@@ -2,8 +2,10 @@ import { getChainProvider } from "@thirdweb-dev/sdk";
 
 import { supportedChainsAndTestnets } from "../constants";
 
-export const isTransactionHash = (hash: string) =>
-  hash.length === 66 && hash.startsWith("0x");
+export const isTransactionHash = (hash: string) => {
+  const _hash = hash.trim();
+  return _hash.length === 66 && _hash.startsWith("0x");
+};
 
 export const detectTxChainSequentially = async (hash: string) => {
   for (const chain of supportedChainsAndTestnets) {
