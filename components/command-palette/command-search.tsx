@@ -5,7 +5,7 @@ import { useMobileDesktop } from "../hooks";
 import { Input } from "../ui/input";
 import Typography from "../ui/typography";
 
-import { useCommandPalette } from "./command-palette-store";
+import { useCommandPaletteStore } from "./command-palette-store";
 
 import { cn } from "@/lib";
 
@@ -18,7 +18,7 @@ export const CommandSearch: FC<CommandSearchProps> = ({
   className,
   label = "🔍 Search",
 }) => {
-  const { onOpen } = useCommandPalette();
+  const { onOpen } = useCommandPaletteStore();
 
   return useMobileDesktop(
     <Input

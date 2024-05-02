@@ -9,14 +9,15 @@ import {
   CommandSeparator,
 } from "../ui/command";
 
-import { useCommandPalette } from "./command-palette-store";
+import { useCommandPaletteStore } from "./command-palette-store";
 import { useCommands } from "./use-commands";
 
 export interface CommandPaletteProps {}
 
 export const CommandPalette: FC<CommandPaletteProps> = () => {
-  const { isOpen, setIsOpen, onOpen } = useCommandPalette();
-  const { navigation, theme, test } = useCommands();
+  const { isOpen, setIsOpen, onOpen, query, setQuery } =
+    useCommandPaletteStore();
+  const { navigation, theme, search } = useCommands();
 
   // Handle cmd + k keyboard event
   useEffect(() => {
@@ -30,14 +31,23 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
     return () => document.removeEventListener("keydown", down);
   }, [onOpen]);
 
+  console.log({ search, navigation, theme });
+
   return (
     <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
-      <CommandInput placeholder="Type a command, or search..." />
+      <CommandInput
+        placeholder="Type a command, or search..."
+        value={query}
+        onValueChange={setQuery}
+      />
       <CommandList>
         <CommandEmpty>No results found.</CommandEmpty>
-        {/* <CommandGroup heading="Wallet">{...wallet}</CommandGroup> */}
-        <CommandGroup heading="Test">{...test}</CommandGroup>
-        <CommandSeparator />
+        {query.length > 0 && (
+          <>
+            <CommandSeparator />
+            <CommandGroup heading="Search Results">{...search}</CommandGroup>
+          </>
+        )}
         <CommandGroup heading="Navigation">{...navigation}</CommandGroup>
         <CommandSeparator />
         <CommandGroup heading="Theme">{...theme}</CommandGroup>

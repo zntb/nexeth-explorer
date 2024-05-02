@@ -25,11 +25,12 @@ export const chainRouter = router({
 
       const provider = getChainProvider(chain, {});
       const gasPrice = (await provider.getGasPrice()).div(1e9).toNumber();
-      const ethPrice = await fetch(
-        "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
-      )
-        .then((res) => res.json())
-        .then((res) => res.ethereum);
+      // const ethPrice = await fetch(
+      //   "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
+      // )
+      //   .then((res) => res.json())
+      //   .then((res) => res.ethereum);
+      const ethPrice = { usd: 2000.0 };
 
       console.log({ ethPrice });
 

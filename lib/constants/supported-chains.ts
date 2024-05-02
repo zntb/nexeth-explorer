@@ -10,8 +10,6 @@ import {
   Polygon,
   PolygonAmoyTestnet,
   PolygonZkevm,
-  // ImmutableZkevm,
-  // ImmutableZkevmTestnet,
   Chain,
 } from "@thirdweb-dev/chains";
 
@@ -22,17 +20,21 @@ export const supportedChains = [
   Base,
   Polygon,
   PolygonZkevm,
-  // ImmutableZkevm,
 ] as Chain[];
 
 export const supportedTestnets = [
   Sepolia,
   Holesky,
   PolygonAmoyTestnet,
-  // ImmutableZkevmTestnet,
   OpSepoliaTestnet,
   BaseSepoliaTestnet,
 ] as Chain[];
 
 export const supportedChainsAndTestnets =
   supportedChains.concat(supportedTestnets);
+
+export const slugToChain: Record<string, Chain> =
+  supportedChainsAndTestnets.reduce((acc, chain) => {
+    acc[chain.slug] = chain;
+    return acc;
+  }, {} as Record<string, Chain>);

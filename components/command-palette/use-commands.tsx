@@ -2,58 +2,95 @@ import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { useDisconnect, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
-import { FC } from "react";
-import { FaWallet } from "react-icons/fa";
-import { PiTestTubeDuotone } from "react-icons/pi";
+import { FC, useMemo } from "react";
+import { FaSearch, FaWallet } from "react-icons/fa";
 
 import { useSession } from "../hooks";
 import { CommandItem } from "../ui/command";
+import { Skeleton } from "../ui/skeleton";
 
-import { useCommandPalette } from "./command-palette-store";
+import { useCommandPaletteStore as useCommandPalette } from "./command-palette-store";
 import { CommandProps, navigationCommands } from "./commands";
+
+import { trpc } from "@/server";
 
 export const useCommands = () => {
   const { setTheme } = useTheme();
   const onWalletOpen = useSetIsWalletModalOpen();
   const onDisconnect = useDisconnect();
   const { isConnected } = useSession();
+  const { query } = useCommandPalette();
 
-  const navigation = navigationCommands.map((command) => (
-    <Command key={command.title} {...command} />
-  ));
+  const {
+    data = { results: [] },
+    isFetching,
+    isLoading,
+  } = trpc.search.get.useQuery({ query }, { keepPreviousData: false });
 
-  const wallet = (
-    isConnected
-      ? [
-          {
-            title: "Disconnect Wallet",
-            icon: <FaWallet />,
-            callback: () => onDisconnect(),
-          },
-        ]
-      : [
-          {
-            title: "Connect Wallet",
-            icon: <FaWallet />,
-            callback: () => onWalletOpen(true),
-          },
-        ]
-  ).map((command) => <Command key={command.title} {...command} />);
+  const navigation = useMemo(() => toCommands(navigationCommands), []);
 
-  const test = [
-    {
-      title: "Test Block #19754226",
-      icon: <PiTestTubeDuotone />,
-      href: "/block/ethereum/19754226",
-    },
-    {
-      title: "Test Transaction 0xaf3fea...fda17333",
-      icon: <PiTestTubeDuotone />,
-      href: "/tx/ethereum/0xaf3feac62a57297724efcd67142b598131dbf74c2955d4f81333fb09fda17333",
-    },
-  ].map((command) => <Command key={command.title} {...command} />);
+  const search = useMemo(() => {
+    if (isFetching) {
+      console.log("loading");
+      return [
+        <CommandItem key="loading-search-results" value={query}>
+          <Skeleton className="w-full h-5" />
+        </CommandItem>,
+      ];
+    }
+    if (data.results.length > 0) {
+      console.log("results");
+      return toCommands(
+        data.results.map((result) => ({
+          title: result.title,
+          href: result.href,
+          icon: <FaSearch />,
+        }))
+      );
+    }
 
-  const theme = [
+    console.log("empty");
+    return [
+      <CommandItem key="loading-search-results" value={query}>
+        No results found.
+      </CommandItem>,
+    ];
+  }, [data.results, isFetching, isLoading, query]);
+
+  // const search =
+  //   isFetching || isLoading
+  //     ? [<CommandLoading key="loading-search-results" />]
+  //     : toCommands(
+  //         data.results.map((result) => ({
+  //           title: result.title,
+  //           href: result.href,
+  //           icon: <FaSearch />,
+  //         }))
+  //       );
+
+  const wallet = useMemo(
+    () =>
+      toCommands(
+        isConnected
+          ? [
+              {
+                title: "Disconnect Wallet",
+                icon: <FaWallet />,
+                callback: () => onDisconnect(),
+              },
+            ]
+          : [
+              {
+                title: "Connect Wallet",
+                icon: <FaWallet />,
+                callback: () => onWalletOpen(true),
+              },
+            ]
+      ),
+    [isConnected, onDisconnect, onWalletOpen]
+  );
+
+  const theme = toCommands([
     {
       title: "Light Theme",
       icon: <SunIcon />,
@@ -69,22 +106,26 @@ export const useCommands = () => {
       icon: <MoonIcon />,
       callback: () => setTheme("system"),
     },
-  ].map((command) => <Command key={command.title} {...command} />);
+  ]);
 
   return {
     navigation,
     theme,
     wallet,
-    test,
+    search,
   };
 };
 
+const toCommands = (commands: CommandProps[]) =>
+  commands.map((command) => <Command key={command.title} {...command} />);
+
 const Command: FC<CommandProps> = ({ title, href, icon, callback }) => {
   const router = useRouter();
-  const { onClose } = useCommandPalette();
+  const { onClose, setQuery } = useCommandPalette();
 
   const onCommand = () => {
     onClose();
+    setQuery("");
     if (href) router.push(href);
     if (callback) callback();
   };
@@ -93,6 +134,7 @@ const Command: FC<CommandProps> = ({ title, href, icon, callback }) => {
     <CommandItem
       className="flex items-center gap-2"
       key={title}
+      value={href}
       onSelect={onCommand}
     >
       {icon}

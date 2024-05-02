@@ -6,7 +6,7 @@ import { FC } from "react";
 import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
 
-import { createBlockLink, shortenString, toTitleCase } from "@/lib";
+import { createBlockLink, shortenString, slugToChain } from "@/lib";
 
 export interface TransactionDetailsTableProps {
   transaction: Transaction;
@@ -29,7 +29,7 @@ export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
           "Block Number": (
             <Link href={createBlockLink({ chain, block })}>{block}</Link>
           ),
-          Chain: toTitleCase(chain),
+          Chain: slugToChain[chain].name,
           From: transaction.from,
           To: transaction.to,
           Data: shortenString(transaction.data),

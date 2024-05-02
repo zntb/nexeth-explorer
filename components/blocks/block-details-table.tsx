@@ -8,12 +8,12 @@ import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
 import Typography from "../ui/typography";
 
-import { createBlockLink, toTitleCase } from "@/lib";
-import { Block, BlockWithTransactions } from "@/server";
+import { createBlockLink, slugToChain } from "@/lib";
+import { Block } from "@/server";
 
 export interface BlockDetailsTableProps {
   chain: string;
-  block: Block | BlockWithTransactions;
+  block: Block;
 }
 
 export const BlockDetailsTable: FC<BlockDetailsTableProps> = ({
@@ -24,7 +24,7 @@ export const BlockDetailsTable: FC<BlockDetailsTableProps> = ({
     <KeyValueTable
       data={{
         "Block Height": <BlockHeight block={block} chain={chain} />,
-        Chain: toTitleCase(chain),
+        Chain: slugToChain[chain].name,
         Status: "",
         Timestamp: new Date(block.timestamp * 1000).toUTCString(),
         Hash: block.hash,
