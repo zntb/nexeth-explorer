@@ -5,6 +5,7 @@ import { searchRequestSchema, searchResponseSchema } from "../schema";
 
 import {
   createTransactionLink,
+  detectContractChains,
   detectTxChain,
   isTransactionHash,
   shortenString,
@@ -36,6 +37,27 @@ export const searchRouter = router({
       }
 
       if (isAddress(query)) {
+        const chains = await detectContractChains(query);
+
+        if (!chains || chains.length === 0) {
+          return {
+            results: [
+              {
+                title: `Address: ${shortenString(query)}`,
+                type: "address",
+                href: `/address/all/${query}`,
+              },
+            ],
+          };
+        }
+
+        return {
+          results: chains.map((chain) => ({
+            title: `${chain.name} Contract: ${shortenString(query)}`,
+            type: "contract",
+            href: `/address/${chain.slug}/${query}`,
+          })),
+        };
       }
 
       return { results: [] };
