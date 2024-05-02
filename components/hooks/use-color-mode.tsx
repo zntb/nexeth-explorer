@@ -2,7 +2,6 @@ import { useTheme } from "next-themes";
 
 export const useColorMode = () => {
   const { theme } = useTheme();
-  console.log(useTheme());
 
   return {
     colorMode: theme,

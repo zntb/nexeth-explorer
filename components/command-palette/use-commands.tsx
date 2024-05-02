@@ -30,7 +30,6 @@ export const useCommands = () => {
 
   const search = useMemo(() => {
     if (isFetching) {
-      console.log("loading");
       return [
         <CommandItem key="loading-search-results" value={query}>
           <Skeleton className="w-full h-5" />
@@ -38,7 +37,6 @@ export const useCommands = () => {
       ];
     }
     if (data.results.length > 0) {
-      console.log("results");
       return toCommands(
         data.results.map((result) => ({
           title: result.title,
@@ -48,7 +46,6 @@ export const useCommands = () => {
       );
     }
 
-    console.log("empty");
     return [
       <CommandItem key="loading-search-results" value={query}>
         No results found.

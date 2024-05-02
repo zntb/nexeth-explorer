@@ -23,11 +23,6 @@ const requireAuth = t.middleware((opts) => {
   return opts.next(opts);
 });
 
-const requestLogger = t.middleware((opts) =>
-  // console.log(`[${opts.type.toUpperCase()}] ${opts.path}`);
-  opts.next(opts)
-);
-
 export const { router, createCallerFactory } = t;
-export const procedure = t.procedure.use(requestLogger).use(maintenanceMode);
+export const procedure = t.procedure.use(maintenanceMode);
 export const protectedProcedure = procedure.use(requireAuth);

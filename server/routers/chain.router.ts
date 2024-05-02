@@ -32,8 +32,6 @@ export const chainRouter = router({
       //   .then((res) => res.ethereum);
       const ethPrice = { usd: 2000.0 };
 
-      console.log({ ethPrice });
-
       return { gasPrice, ethPrice };
     }),
 });

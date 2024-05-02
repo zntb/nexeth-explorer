@@ -31,8 +31,6 @@ export const CommandPalette: FC<CommandPaletteProps> = () => {
     return () => document.removeEventListener("keydown", down);
   }, [onOpen]);
 
-  console.log({ search, navigation, theme });
-
   return (
     <CommandDialog open={isOpen} onOpenChange={setIsOpen}>
       <CommandInput
