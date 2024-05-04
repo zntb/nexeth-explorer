@@ -1,15 +1,17 @@
 import { Chain } from "@thirdweb-dev/chains";
 import { createServerSideHelpers } from "@trpc/react-query/server";
+import { minutesToSeconds } from "date-fns";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { z } from "zod";
 
-import { ChainHeader } from "@/components/chains";
+import { ChainHeader, ChainStatsCard } from "@/components/chains";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { createChainLink, slugToChain } from "@/lib";
 import { appRouter } from "@/server/routers/router";
 
 const ChainPage = ({
   chain,
+  stats,
 }: InferGetStaticPropsType<typeof getStaticProps>) => (
   <AppLayout>
     <PageContainer
@@ -20,6 +22,8 @@ const ChainPage = ({
       ]}
     >
       <ChainHeader chain={chain} />
+
+      <ChainStatsCard stats={stats} />
     </PageContainer>
   </AppLayout>
 );
@@ -31,10 +35,19 @@ export const getStaticProps = async (ctx: GetStaticPropsContext) => {
 
   const chain = slugToChain(slug) as Chain;
 
+  const router = createServerSideHelpers({
+    router: appRouter,
+    ctx: {},
+  });
+
+  const { stats } = await router.chains.getChainStats.fetch({ chain: slug });
+
   return {
     props: {
       chain,
+      stats,
     },
+    revalidate: minutesToSeconds(10),
   };
 };
 

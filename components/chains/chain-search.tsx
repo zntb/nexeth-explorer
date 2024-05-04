@@ -26,7 +26,7 @@ export interface ChainSearchProps {
 
 export const ChainSearch: FC<ChainSearchProps> = ({ chains, testnets }) => {
   const [search, setSearch] = useState("");
-  const [includeTestnets, setIncludeTestnets] = useState(true);
+  const [includeTestnets, setIncludeTestnets] = useState(false);
   const [sort, setSort] = useState<SortOption>("name-up");
 
   const filteredDashboards = useMemo(

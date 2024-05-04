@@ -8,10 +8,6 @@ export class BlockscoutService {
   async getChainStats(): Promise<ChainStats> {
     return fetch(`${this.getUrl()}/api/v2/stats`)
       .then((res) => res.json())
-      .then((d) => {
-        console.log(d);
-        return d;
-      })
       .then(chainStatsSchema.parse);
   }
 
@@ -33,4 +29,6 @@ const blockscoutUrlMap: Partial<Record<ChainSlug, string>> = {
   "polygon-zkevm": "https://zkevm.blockscout.com",
   sepolia: "https://eth-sepolia.blockscout.com",
   holesky: "https://eth-holesky.blockscout.com",
+  "base-sepolia-testnet": "https://base-sepolia.blockscout.com",
+  "op-sepolia-testnet": "https://optimism-sepolia.blockscout.com",
 };

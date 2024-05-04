@@ -20,7 +20,6 @@ export const ExplorerButton: FC<ExplorerButtonProps> = ({
 }) => {
   const url =
     type && location ? `${explorer.url}/${type}/${location}` : explorer.url;
-  console.log(explorer);
 
   return (
     <Link href={url} target="_blank" rel="noopener noreferrer">

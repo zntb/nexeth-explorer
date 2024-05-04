@@ -1,12 +1,12 @@
-import { FC } from "react";
+import { FC, ReactNode } from "react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export interface StatsCardProps {
   title: string;
-  value: string;
-  subtitle: string;
-  icon: JSX.Element;
+  value: ReactNode | string | number;
+  subtitle?: string;
+  icon?: JSX.Element;
 }
 
 export const StatsCard: FC<StatsCardProps> = ({
@@ -22,7 +22,7 @@ export const StatsCard: FC<StatsCardProps> = ({
     </CardHeader>
     <CardContent>
       <div className="text-2xl font-bold">{value}</div>
-      <p className="text-xs text-muted-foreground">{subtitle}</p>
+      {subtitle && <p className="text-xs text-muted-foreground">{subtitle}</p>}
     </CardContent>
   </Card>
 );

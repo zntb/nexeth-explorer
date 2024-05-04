@@ -25,26 +25,29 @@ export type GetGlobalStatsResponse = z.infer<
   typeof getGlobalStatsResponseSchema
 >;
 
+export const chainGasSchema = z.object({
+  average: z.number(),
+  fast: z.number(),
+  slow: z.number(),
+});
+export type ChainGas = z.infer<typeof chainGasSchema>;
+
 export const chainStatsSchema = z.object({
   average_block_time: z.number(),
   coin_price: z.string().nullable(),
   coin_price_change_percentage: z.number().nullable(),
   gas_price_updated_at: z.string(),
-  gas_prices: z.object({
-    average: z.number(),
-    fast: z.number(),
-    slow: z.number(),
-  }),
+  gas_prices: chainGasSchema,
   gas_prices_update_in: z.number(),
   gas_used_today: z.string(),
   market_cap: z.string(),
   network_utilization_percentage: z.number(),
   secondary_coin_price: z.string().nullable(),
   static_gas_price: z.string().nullable(),
-  total_addresses: z.string(),
-  total_blocks: z.string(),
+  total_addresses: z.coerce.number(),
+  total_blocks: z.coerce.number(),
   total_gas_used: z.string(),
-  total_transactions: z.string(),
+  total_transactions: z.coerce.number(),
   transactions_today: z.string(),
   tvl: z.string().nullable(),
 });
