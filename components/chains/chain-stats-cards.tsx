@@ -64,17 +64,23 @@ export const ChainStatsCard: FC<ChainStatsCardsProps> = ({
         value={
           <div className="flex flex-row gap-2 justify-between font-normal">
             <div className="flex flex-col gap-2 items-center">
-              <div className="text-2xl font-bold">{gas_prices.slow}</div>
+              <div className="text-2xl font-bold">
+                {gas_prices.slow.toFixed(1)}
+              </div>
               <p className="text-xs text-muted-foreground">Slow</p>
             </div>
 
             <div className="flex flex-col gap-2 items-center text-green-500">
-              <div className="text-2xl font-bold">{gas_prices.average}</div>
+              <div className="text-2xl font-bold">
+                {gas_prices.average.toFixed(1)}
+              </div>
               <p className="text-xs ">Average</p>
             </div>
 
             <div className="flex flex-col gap-2 items-center text-red-500">
-              <div className="text-2xl font-bold">{gas_prices.fast}</div>
+              <div className="text-2xl font-bold">
+                {gas_prices.fast.toFixed(1)}
+              </div>
               <p className="text-xs ">Fast</p>
             </div>
           </div>
