@@ -1,5 +1,3 @@
-import { getChainProvider } from "@thirdweb-dev/sdk";
-
 import { procedure, router } from "../router-procedures";
 import {
   getChainsResponseSchema,

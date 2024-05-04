@@ -1,3 +1,4 @@
+import { Chain } from "@thirdweb-dev/chains";
 import Link from "next/link";
 import { FC, useMemo } from "react";
 
@@ -10,7 +11,7 @@ import { Block } from "@/server";
 export interface BlockTimelineProps {
   latestBlock: Block;
   selectedBlock: Block;
-  chain: string;
+  chain: Chain;
 }
 
 export const BlockTimeline: FC<BlockTimelineProps> = ({

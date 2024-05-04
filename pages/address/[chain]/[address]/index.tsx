@@ -2,7 +2,13 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 
 import { ChainAddressDetailsTable } from "@/components/address";
 import { AppLayout, PageContainer } from "@/components/layouts";
-import { isChainContract, propsParser, shortenString } from "@/lib";
+import {
+  createChainLink,
+  isChainContract,
+  propsParser,
+  shortenString,
+  slugToChain,
+} from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getChainAddressRequestSchema } from "@/server";
 
@@ -14,14 +20,10 @@ const ChainAddressPage = ({
   <AppLayout>
     <PageContainer
       title={shortenString(address)}
-      breadcrumbs={
-        chain === "all"
-          ? [{ name: shortenString(address), href: "" }]
-          : [
-              { name: toTitleCase(chain), href: `/chains/${chain}` },
-              { name: shortenString(address), href: "" },
-            ]
-      }
+      breadcrumbs={[
+        { name: toTitleCase(chain.name), href: createChainLink({ chain }) },
+        { name: shortenString(address), href: "" },
+      ]}
     >
       {isContract ? "This is a contract address." : "This is a wallet address."}
       <ChainAddressDetailsTable address={address} chain={chain} />
@@ -39,7 +41,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: propsParser({
       address,
-      chain,
+      chain: slugToChain(chain),
       isContract,
     }),
   };

@@ -1,3 +1,4 @@
+import { Chain } from "@thirdweb-dev/chains";
 import { Transaction } from "ethers";
 import { formatEther, formatUnits } from "ethers/lib/utils";
 import Link from "next/link";
@@ -6,11 +7,11 @@ import { FC } from "react";
 import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
 
-import { createBlockLink, shortenString, slugToChain } from "@/lib";
+import { createBlockLink, shortenString } from "@/lib";
 
 export interface TransactionDetailsTableProps {
   transaction: Transaction;
-  chain: string;
+  chain: Chain;
 }
 
 export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
@@ -29,7 +30,7 @@ export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
           "Block Number": (
             <Link href={createBlockLink({ chain, block })}>{block}</Link>
           ),
-          Chain: slugToChain[chain].name,
+          Chain: chain.name,
           From: transaction.from,
           To: transaction.to,
           Data: shortenString(transaction.data),

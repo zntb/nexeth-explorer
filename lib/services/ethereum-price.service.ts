@@ -14,11 +14,9 @@ export class EthereumPriceService {
     const cachedPrice = await this.redisService.get(ETH_PRICE_KEY);
 
     if (cachedPrice) {
-      console.log("Returning Cached Price");
       return ethPriceSchema.parse(cachedPrice);
     }
 
-    console.log("Fetching New Price");
     const ethPrice = await fetch(
       "https://api.coingecko.com/api/v3/simple/price?ids=ethereum&vs_currencies=usd"
     )

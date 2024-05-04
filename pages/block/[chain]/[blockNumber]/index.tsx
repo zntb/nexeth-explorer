@@ -3,11 +3,10 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
 import { BlockDetailsTable } from "@/components/blocks";
-import { BlockTabs } from "@/components/blocks/block-tabs";
 import { BlockTimeline } from "@/components/blocks/block-timeline";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { Separator } from "@/components/ui/separator";
-import { propsParser } from "@/lib";
+import { createChainLink, propsParser, slugToChain } from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getBlockRequestSchema } from "@/server";
 import { appRouter } from "@/server/routers/router";
@@ -21,7 +20,7 @@ const BlockPage = ({
     <PageContainer
       title={`#${block.number}`}
       breadcrumbs={[
-        { name: toTitleCase(chain), href: `/chains/${chain}` },
+        { name: toTitleCase(chain.name), href: createChainLink({ chain }) },
         { name: `Block #${block.number}`, href: "" },
       ]}
     >
@@ -32,7 +31,7 @@ const BlockPage = ({
       />
       <BlockDetailsTable block={block} chain={chain} />
       <Separator />
-      <BlockTabs block={block} chain={chain} />
+      {/* <BlockTabs block={block} chain={chain} /> */}
     </PageContainer>
   </AppLayout>
 );
@@ -63,7 +62,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: propsParser({
       block,
       latestBlock,
-      chain,
+      chain: slugToChain(chain),
     }),
   };
 };

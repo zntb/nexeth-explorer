@@ -1,10 +1,11 @@
-import { getChainBySlug, Chain } from "@thirdweb-dev/chains";
+import { Chain } from "@thirdweb-dev/chains";
 import { createServerSideHelpers } from "@trpc/react-query/server";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { z } from "zod";
 
 import { ChainCard } from "@/components/chains/chain-card";
 import { AppLayout, PageContainer } from "@/components/layouts";
+import { createChainLink, slugToChain } from "@/lib";
 import { appRouter } from "@/server/routers/router";
 
 const ChainPage = ({
@@ -15,7 +16,7 @@ const ChainPage = ({
       title={chain.name}
       breadcrumbs={[
         { name: "Chains", href: "/chains" },
-        { name: chain.name, href: `/chains/${chain.slug}` },
+        { name: chain.name, href: createChainLink({ chain }) },
       ]}
     >
       <ChainCard chain={chain} />
@@ -28,7 +29,7 @@ export default ChainPage;
 export const getStaticProps = async (ctx: GetStaticPropsContext) => {
   const { chain: slug } = z.object({ chain: z.string() }).parse(ctx.params);
 
-  const chain = getChainBySlug(slug) as Chain;
+  const chain = slugToChain(slug) as Chain;
 
   return {
     props: {

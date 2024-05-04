@@ -31,7 +31,7 @@ export const searchRouter = router({
             {
               title: `${chain.name} Transaction: ${shortenString(query)}`,
               type: "transaction",
-              href: createTransactionLink({ chain: chain.slug, hash: query }),
+              href: createTransactionLink({ chain, hash: query }),
             },
           ],
         };

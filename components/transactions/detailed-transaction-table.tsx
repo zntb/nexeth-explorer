@@ -1,3 +1,4 @@
+import { Chain } from "@thirdweb-dev/chains";
 import { Transaction } from "ethers";
 import Link from "next/link";
 
@@ -14,7 +15,7 @@ import { createTransactionLink } from "@/lib";
 
 export interface DetailedTransactionTableProps {
   transactions: Transaction[];
-  chain: string;
+  chain: Chain;
 }
 
 export const DetailedTransactionTable: React.FC<

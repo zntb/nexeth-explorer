@@ -4,7 +4,12 @@ import SuperJSON from "superjson";
 
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { TransactionDetailsTable } from "@/components/transactions";
-import { propsParser, shortenString } from "@/lib";
+import {
+  createChainLink,
+  propsParser,
+  shortenString,
+  slugToChain,
+} from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getTransactionRequestSchema } from "@/server";
 import { appRouter } from "@/server/routers/router";
@@ -17,7 +22,7 @@ const TransactionPage = ({
     <PageContainer
       title="Transaction"
       breadcrumbs={[
-        { name: toTitleCase(chain), href: `/chains/${chain}` },
+        { name: toTitleCase(chain.name), href: createChainLink({ chain }) },
         { name: shortenString(transaction.hash), href: "" },
       ]}
     >
@@ -51,7 +56,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   return {
     props: propsParser({
       transaction,
-      chain,
+      chain: slugToChain(chain),
     }),
   };
 };

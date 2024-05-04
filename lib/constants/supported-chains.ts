@@ -11,6 +11,7 @@ import {
   PolygonAmoyTestnet,
   PolygonZkevm,
   Chain,
+  getChainBySlug,
 } from "@thirdweb-dev/chains";
 
 export const supportedChains = [
@@ -33,8 +34,6 @@ export const supportedTestnets = [
 export const supportedChainsAndTestnets =
   supportedChains.concat(supportedTestnets);
 
-export const slugToChain: Record<string, Chain> =
-  supportedChainsAndTestnets.reduce((acc, chain) => {
-    acc[chain.slug] = chain;
-    return acc;
-  }, {} as Record<string, Chain>);
+export const slugToChain = (slug: string) =>
+  getChainBySlug(slug) ??
+  supportedChainsAndTestnets.find((chain) => chain.slug === slug);

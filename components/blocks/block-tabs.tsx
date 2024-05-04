@@ -1,3 +1,4 @@
+import { Chain } from "@thirdweb-dev/chains";
 import { Transaction } from "ethers";
 import { FC } from "react";
 
@@ -15,7 +16,7 @@ import { Block } from "@/server";
 
 export interface BlockTabsProps {
   block: Block;
-  chain: string;
+  chain: Chain;
 }
 
 export const BlockTabs: FC<BlockTabsProps> = ({ block, chain }) => (
