@@ -8,7 +8,7 @@ import {
   Base,
   BaseSepoliaTestnet,
   Polygon,
-  PolygonAmoyTestnet,
+  // PolygonAmoyTestnet,
   PolygonZkevm,
   Chain,
   getChainBySlug,
@@ -26,7 +26,7 @@ export const supportedChains = [
 export const supportedTestnets = [
   Sepolia,
   Holesky,
-  PolygonAmoyTestnet,
+  // PolygonAmoyTestnet,
   OpSepoliaTestnet,
   BaseSepoliaTestnet,
 ] as Chain[];

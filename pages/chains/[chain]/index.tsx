@@ -3,7 +3,7 @@ import { createServerSideHelpers } from "@trpc/react-query/server";
 import { GetStaticPropsContext, InferGetStaticPropsType } from "next";
 import { z } from "zod";
 
-import { ChainCard } from "@/components/chains/chain-card";
+import { ChainHeader } from "@/components/chains";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { createChainLink, slugToChain } from "@/lib";
 import { appRouter } from "@/server/routers/router";
@@ -19,7 +19,7 @@ const ChainPage = ({
         { name: chain.name, href: createChainLink({ chain }) },
       ]}
     >
-      <ChainCard chain={chain} />
+      <ChainHeader chain={chain} />
     </PageContainer>
   </AppLayout>
 );

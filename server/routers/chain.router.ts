@@ -1,12 +1,16 @@
 import { procedure, router } from "../router-procedures";
 import {
+  getChainStatsRequestSchema,
+  getChainStatsResponseSchema,
   getChainsResponseSchema,
-  getNetworkStatsRequestSchema,
-  getNetworkStatsResponseSchema,
+  getGlobalStatsRequestSchema,
+  getGlobalStatsResponseSchema,
 } from "../schema/chain.schema";
 
 import {
+  BlockscoutService,
   EthereumPriceService,
+  slugToChain,
   supportedChains,
   supportedTestnets,
 } from "@/lib";
@@ -19,9 +23,9 @@ export const chainRouter = router({
     })
   ),
 
-  getNetworkStats: procedure
-    .input(getNetworkStatsRequestSchema)
-    .output(getNetworkStatsResponseSchema)
+  getGlobalStats: procedure
+    .input(getGlobalStatsRequestSchema)
+    .output(getGlobalStatsResponseSchema)
     .query(async ({ input }) => {
       const { chain } = input;
 
@@ -30,5 +34,16 @@ export const chainRouter = router({
       const ethPrice = await ethPriceService.getEthPrice();
 
       return { gasPrice, ethPrice };
+    }),
+
+  getChainStats: procedure
+    .input(getChainStatsRequestSchema)
+    .output(getChainStatsResponseSchema)
+    .query(async ({ input }) => {
+      const chain = slugToChain(input.chain);
+      const blockscoutService = new BlockscoutService(chain);
+      const stats = await blockscoutService.getChainStats();
+
+      return { stats };
     }),
 });
