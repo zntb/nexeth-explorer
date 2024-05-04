@@ -1,5 +1,9 @@
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { useDisconnect, useSetIsWalletModalOpen } from "@thirdweb-dev/react";
+import {
+  isEnsName,
+  useDisconnect,
+  useSetIsWalletModalOpen,
+} from "@thirdweb-dev/react";
 import { isAddress } from "ethers/lib/utils";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
@@ -24,7 +28,7 @@ export const useCommands = () => {
   const { query } = useCommandPalette();
 
   const isSearchable = useMemo(
-    () => isAddress(query) || isTransactionHash(query),
+    () => isAddress(query) || isTransactionHash(query) || isEnsName(query),
     [query]
   );
 
@@ -129,7 +133,7 @@ const Command: FC<CommandProps> = ({ title, href, icon, callback }) => {
     <CommandItem
       className="flex items-center gap-2"
       key={title}
-      value={href}
+      value={`${title} ${href}`}
       onSelect={onCommand}
     >
       {icon}

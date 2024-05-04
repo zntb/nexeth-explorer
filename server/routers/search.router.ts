@@ -1,3 +1,4 @@
+import { isEnsName, resolveEns } from "@thirdweb-dev/react";
 import { isAddress } from "ethers/lib/utils";
 
 import { procedure, router } from "../router-procedures";
@@ -36,6 +37,17 @@ export const searchRouter = router({
         };
       }
 
+      let ensName: string | undefined = undefined;
+
+      if (isEnsName(query)) {
+        const resolvedEns = await resolveEns(query);
+        if (!resolvedEns) {
+          return { results: [] };
+        }
+        ensName = query;
+        query = resolvedEns;
+      }
+
       if (isAddress(query)) {
         const chains = await detectContractChains(query);
 
@@ -43,7 +55,9 @@ export const searchRouter = router({
           return {
             results: [
               {
-                title: `Address: ${shortenString(query)}`,
+                title: `Address:${
+                  ensName ? ` (${ensName})` : ""
+                } ${shortenString(query)}`,
                 type: "address",
                 href: `/address/all/${query}`,
               },
@@ -53,7 +67,9 @@ export const searchRouter = router({
 
         return {
           results: chains.map((chain) => ({
-            title: `${chain.name} Contract: ${shortenString(query)}`,
+            title: `${chain.name} Contract:${
+              ensName ? ` (${ensName})` : ""
+            } ${shortenString(query)}`,
             type: "contract",
             href: `/address/${chain.slug}/${query}`,
           })),

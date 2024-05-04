@@ -18,7 +18,7 @@ const ChainAddressPage = ({
         chain === "all"
           ? [{ name: shortenString(address), href: "" }]
           : [
-              { name: toTitleCase(chain), href: `${address}/chains/${chain}` },
+              { name: toTitleCase(chain), href: `/chains/${chain}` },
               { name: shortenString(address), href: "" },
             ]
       }
