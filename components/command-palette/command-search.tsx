@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { ClassNameValue } from "tailwind-merge";
 
-import { useMobileDesktop } from "../hooks";
-import { Input } from "../ui/input";
-import Typography from "../ui/typography";
+import { useDesktopOnly, useMobileDesktop } from "../hooks";
+import { Button } from "../ui/button";
 
 import { useCommandPaletteStore } from "./command-palette-store";
 
@@ -21,21 +20,21 @@ export const CommandSearch: FC<CommandSearchProps> = ({
   const { onOpen } = useCommandPaletteStore();
 
   return useMobileDesktop(
-    <Input
-      placeholder="🔍"
+    <Button
+      variant="outline"
       onClick={onOpen}
-      className="w-9 h-9 pl-[10px] pr-0 flex content-center items-center"
-    />,
-    <div
-      className={cn(
-        "flex flex-row items-center gap-2 w-full mx-auto",
-        className
-      )}
+      className={cn("w-9 h-9", className)}
     >
-      <Input placeholder={label} onClick={onOpen} className="w-[330px]" />
-      <Typography effect="tiny">or</Typography>
-      <CommandKeys />
-    </div>
+      {label}
+    </Button>,
+    <Button
+      variant="outline"
+      onClick={onOpen}
+      className={cn(className, "flex justify-between min gap-2 px-2 text-xs")}
+    >
+      {label}
+      {useDesktopOnly(<CommandKeys />)}
+    </Button>
   );
 };
 

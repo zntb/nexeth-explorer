@@ -8,8 +8,8 @@ export const nexethBannerTransparentDark =
 export const nexethBannerLight = "/logos/nexeth-banner-light.jpeg";
 export const nexethBannerDark = "/logos/nexeth-banner-dark.jpeg";
 
-export const nexethLogoLight = "/logos/nexeth-logo-light.jpeg";
-export const nexethLogoDark = "/logos/nexeth-logo-dark.jpeg";
+export const nexethLogoLight = "/logos/nexeth-logo-transparent-light.png";
+export const nexethLogoDark = "/logos/nexeth-logo-transparent-dark.png";
 
 export const nexethLogoTransparent = "/logos/nexeth-logo-transparent.png";
 
