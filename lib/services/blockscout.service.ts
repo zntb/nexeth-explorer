@@ -1,6 +1,13 @@
 import { Chain, ChainSlug } from "@thirdweb-dev/chains";
 
-import { ChainStats, chainStatsSchema } from "@/server";
+import {
+  ChainMarketChart,
+  ChainStats,
+  ChainTransactionChart,
+  chainMarketChartSchema,
+  chainStatsSchema,
+  chainTransactionChartSchema,
+} from "@/server";
 
 export class BlockscoutService {
   constructor(private readonly chain: Chain) {}
@@ -9,6 +16,18 @@ export class BlockscoutService {
     return fetch(`${this.getUrl()}/api/v2/stats`)
       .then((res) => res.json())
       .then(chainStatsSchema.parse);
+  }
+
+  async getChainTransactionChart(): Promise<ChainTransactionChart> {
+    return fetch(`${this.getUrl()}/api/v2/stats/charts/transactions`)
+      .then((res) => res.json())
+      .then(chainTransactionChartSchema.parse);
+  }
+
+  async getChainMarketChart(): Promise<ChainMarketChart> {
+    return fetch(`${this.getUrl()}/api/v2/stats/charts/market`)
+      .then((res) => res.json())
+      .then(chainMarketChartSchema.parse);
   }
 
   private getUrl(): string {

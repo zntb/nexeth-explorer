@@ -53,11 +53,35 @@ export const chainStatsSchema = z.object({
 });
 export type ChainStats = z.infer<typeof chainStatsSchema>;
 
+export const chainTransactionChartSchema = z.object({
+  chart_data: z.array(
+    z.object({
+      date: z.string(),
+      tx_count: z.number(),
+    })
+  ),
+});
+export type ChainTransactionChart = z.infer<typeof chainTransactionChartSchema>;
+
+export const chainMarketChartSchema = z.object({
+  chart_data: z.array(
+    z.object({
+      date: z.string(),
+      closing_price: z.string(),
+      market_cap: z.string(),
+      tvl: z.string().nullable(),
+    })
+  ),
+});
+export type ChainMarketChart = z.infer<typeof chainMarketChartSchema>;
+
 export const getChainStatsRequestSchema = z.object({
   chain: z.string(),
 });
 export type GetChainStatsRequest = z.infer<typeof getChainStatsRequestSchema>;
 export const getChainStatsResponseSchema = z.object({
   stats: chainStatsSchema,
+  transactionChart: chainTransactionChartSchema,
+  marketChart: chainMarketChartSchema,
 });
 export type GetChainStatsResponse = z.infer<typeof getChainStatsResponseSchema>;

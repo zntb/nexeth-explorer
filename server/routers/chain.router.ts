@@ -41,9 +41,13 @@ export const chainRouter = router({
     .output(getChainStatsResponseSchema)
     .query(async ({ input }) => {
       const chain = slugToChain(input.chain);
+
       const blockscoutService = new BlockscoutService(chain);
       const stats = await blockscoutService.getChainStats();
+      const transactionChart =
+        await blockscoutService.getChainTransactionChart();
+      const marketChart = await blockscoutService.getChainMarketChart();
 
-      return { stats };
+      return { stats, transactionChart, marketChart };
     }),
 });
