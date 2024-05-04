@@ -4,6 +4,7 @@ import { formatEther } from "ethers/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
 
+import { LinkedChainIcon } from "../chains";
 import { Button } from "../ui/button";
 import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
@@ -25,7 +26,7 @@ export const BlockDetailsTable: FC<BlockDetailsTableProps> = ({
     <KeyValueTable
       data={{
         "Block Height": <BlockHeight block={block} chain={chain} />,
-        Chain: chain.name,
+        Chain: <LinkedChainIcon chain={chain} />,
         Status: "",
         Timestamp: new Date(block.timestamp * 1000).toUTCString(),
         Hash: block.hash,

@@ -4,6 +4,7 @@ import { formatEther, formatUnits } from "ethers/lib/utils";
 import Link from "next/link";
 import { FC } from "react";
 
+import { LinkedChainIcon } from "../chains";
 import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
 
@@ -30,7 +31,7 @@ export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
           "Block Number": (
             <Link href={createBlockLink({ chain, block })}>{block}</Link>
           ),
-          Chain: chain.name,
+          Chain: <LinkedChainIcon chain={chain} />,
           From: transaction.from,
           To: transaction.to,
           Data: shortenString(transaction.data),

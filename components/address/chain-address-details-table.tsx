@@ -2,6 +2,7 @@ import { Chain } from "@thirdweb-dev/chains";
 import { Address } from "@thirdweb-dev/sdk";
 import { FC } from "react";
 
+import { LinkedChainIcon } from "../chains";
 import { Card } from "../ui/card";
 import { KeyValueTable } from "../ui/key-value-table";
 
@@ -18,7 +19,7 @@ export const ChainAddressDetailsTable: FC<ChainAddressDetailsTableProps> = ({
     <KeyValueTable
       data={{
         Address: address,
-        Chain: chain && chain !== "all" ? chain.name : "Unknown",
+        Chain: chain ? <LinkedChainIcon chain={chain} /> : "Unknown",
       }}
     />
   </Card>
