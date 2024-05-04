@@ -32,6 +32,7 @@ export const searchRouter = router({
               title: `${chain.name} Transaction: ${shortenString(query)}`,
               type: "transaction",
               href: createTransactionLink({ chain, hash: query }),
+              chain: chain.slug,
             },
           ],
         };
@@ -72,6 +73,7 @@ export const searchRouter = router({
             } ${shortenString(query)}`,
             type: "contract",
             href: `/address/${chain.slug}/${query}`,
+            chain: chain.slug,
           })),
         };
       }

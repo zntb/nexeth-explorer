@@ -82,6 +82,11 @@ export const Hero: FC = () => (
           "0x0a6726573baacdac113a1454190b0a7e88e1ffded3fac660b35d69209daebbd8"
         )}`}
       />
+      <CommandOpenAction
+        search="Dark Theme"
+        icon={<MoonIcon />}
+        label="Dark Theme"
+      />
       <CommandOpenAction search="Chains" icon="🔗" label="Chains" />
       <CommandOpenAction
         search="vitalik.eth"
@@ -101,19 +106,14 @@ export const Hero: FC = () => (
         label="WETH (Base/Optimism)"
       />
       <CommandOpenAction
-        search="Dark Theme"
+        search="Light Theme"
         icon={<MoonIcon />}
-        label="Dark Theme"
+        label="Light Theme"
       />
       <CommandOpenAction
         search="Polygon"
         icon={<ChainIcon chain={Polygon} size={15} />}
         label="Polygon"
-      />
-      <CommandOpenAction
-        search="Light Theme"
-        icon={<MoonIcon />}
-        label="Light Theme"
       />
     </div>
   </div>

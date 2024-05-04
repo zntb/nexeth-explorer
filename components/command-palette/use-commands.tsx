@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import { FC, useMemo } from "react";
 import { FaGlobe, FaWallet } from "react-icons/fa";
 
+import { ChainIcon } from "../chains";
 import { useSession } from "../hooks";
 import { CommandItem } from "../ui/command";
 import { Skeleton } from "../ui/skeleton";
@@ -17,7 +18,7 @@ import { Skeleton } from "../ui/skeleton";
 import { useCommandPaletteStore as useCommandPalette } from "./command-palette-store";
 import { CommandProps, navigationCommands } from "./commands";
 
-import { isTransactionHash } from "@/lib";
+import { isTransactionHash, slugToChain } from "@/lib";
 import { trpc } from "@/server";
 
 export const useCommands = () => {
@@ -54,9 +55,8 @@ export const useCommands = () => {
     if (data.results.length > 0) {
       return toCommands(
         data.results.map((result) => ({
-          title: result.title,
-          href: result.href,
           icon: <FaGlobe />,
+          ...result,
         }))
       );
     }
@@ -118,7 +118,7 @@ export const useCommands = () => {
 const toCommands = (commands: CommandProps[]) =>
   commands.map((command) => <Command key={command.title} {...command} />);
 
-const Command: FC<CommandProps> = ({ title, href, icon, callback }) => {
+const Command: FC<CommandProps> = ({ title, href, icon, callback, chain }) => {
   const router = useRouter();
   const { onClose, setQuery } = useCommandPalette();
 
@@ -136,7 +136,7 @@ const Command: FC<CommandProps> = ({ title, href, icon, callback }) => {
       value={`${title} ${href}`}
       onSelect={onCommand}
     >
-      {icon}
+      {chain ? <ChainIcon chain={slugToChain(chain)} size={20} /> : icon}
       <span>{title}</span>
     </CommandItem>
   );
