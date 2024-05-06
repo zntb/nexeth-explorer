@@ -2,6 +2,7 @@ import { createServerSideHelpers } from "@trpc/react-query/server";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
+import { ExplorerButtonGroup } from "@/components/explorers";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { TransactionDetailsTable } from "@/components/transactions";
 import {
@@ -26,6 +27,11 @@ const TransactionPage = ({
         { name: shortenString(transaction.hash), href: "" },
       ]}
     >
+      <ExplorerButtonGroup
+        explorers={chain.explorers}
+        type="tx"
+        location={transaction.hash}
+      />
       <TransactionDetailsTable transaction={transaction} chain={chain} />
     </PageContainer>
   </AppLayout>

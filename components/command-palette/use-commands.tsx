@@ -7,7 +7,7 @@ import {
 import { isAddress } from "ethers/lib/utils";
 import { useRouter } from "next/router";
 import { useTheme } from "next-themes";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { FaGlobe, FaWallet } from "react-icons/fa";
 
 import { ChainIcon } from "../chains";
@@ -61,7 +61,8 @@ export const useCommands = () => {
         data.results.map((result) => ({
           icon: <FaGlobe />,
           ...result,
-        }))
+        })),
+        true
       );
     }
     return [
@@ -119,12 +120,25 @@ export const useCommands = () => {
   };
 };
 
-const toCommands = (commands: CommandProps[]) =>
-  commands.map((command) => <Command key={command.title} {...command} />);
+const toCommands = (commands: CommandProps[], prefetch: boolean = false) =>
+  commands.map((command) => (
+    <Command key={command.title} {...command} prefetch={prefetch} />
+  ));
 
-const Command: FC<CommandProps> = ({ title, href, icon, callback, chain }) => {
+const Command: FC<CommandProps & { prefetch?: boolean }> = ({
+  title,
+  href,
+  icon,
+  callback,
+  chain,
+  prefetch = false,
+}) => {
   const router = useRouter();
   const { onClose, setQuery } = useCommandPalette();
+
+  useEffect(() => {
+    if (prefetch && href?.startsWith("/")) router.prefetch(href);
+  }, [href, prefetch, router]);
 
   const onCommand = () => {
     onClose();

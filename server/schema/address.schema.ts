@@ -17,6 +17,14 @@ export const getAddressRequestSchema = z.object({
 });
 export type GetAddressRequest = z.infer<typeof getAddressRequestSchema>;
 
+export const getAddressDetailsResponseSchema = z.object({
+  balance: z.string(),
+  isContract: z.boolean(),
+});
+export type GetAddressDetailsResponse = z.infer<
+  typeof getAddressDetailsResponseSchema
+>;
+
 export const matchingAddresses = (
   addressOne?: string,
   addressTwo?: string

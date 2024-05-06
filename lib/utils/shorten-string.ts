@@ -4,9 +4,9 @@
  */
 export const shortenString = (
   str?: string,
-  leadLength = 8,
-  trailLength = 5,
-  maxLength = 20,
+  leadLength = 6,
+  trailLength = 4,
+  maxLength = 20
 ): string => {
   if (!str) return "";
   if (str.length <= maxLength) return str;
@@ -15,5 +15,8 @@ export const shortenString = (
     return str;
   }
 
-  return `${str.slice(0, leadLength)}...${str.slice(str.length - trailLength, str.length)}`;
+  return `${str.slice(0, leadLength)}...${str.slice(
+    str.length - trailLength,
+    str.length
+  )}`;
 };

@@ -1,14 +1,12 @@
 import {
   Ethereum,
   Sepolia,
-  Holesky,
   Optimism,
   OpSepoliaTestnet,
   Arbitrum,
   Base,
   BaseSepoliaTestnet,
   Polygon,
-  // PolygonAmoyTestnet,
   PolygonZkevm,
   Chain,
   getChainBySlug,
@@ -25,8 +23,6 @@ export const supportedChains = [
 
 export const supportedTestnets = [
   Sepolia,
-  Holesky,
-  // PolygonAmoyTestnet,
   OpSepoliaTestnet,
   BaseSepoliaTestnet,
 ] as Chain[];

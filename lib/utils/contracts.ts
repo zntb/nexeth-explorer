@@ -9,7 +9,7 @@ export const isChainContract = async (
 ) => {
   const client = getChainProvider(chain, {});
   const code = await client.getCode(address);
-  return code && code !== "0x";
+  return !!(code && code !== "0x");
 };
 
 export const detectContractChains = async (address: string) =>

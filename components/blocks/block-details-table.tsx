@@ -27,7 +27,6 @@ export const BlockDetailsTable: FC<BlockDetailsTableProps> = ({
       data={{
         "Block Height": <BlockHeight block={block} chain={chain} />,
         Chain: <LinkedChainIcon chain={chain} />,
-        Status: "",
         Timestamp: new Date(block.timestamp * 1000).toUTCString(),
         Hash: block.hash,
         ParentHash: block.parentHash,

@@ -1,5 +1,6 @@
 import { router } from "../router-procedures";
 
+import { addressRouter } from "./address.router";
 import { chainRouter } from "./chain.router";
 import { dashboardRouter } from "./dashboard.router";
 import { healthRouter } from "./health.router";
@@ -14,6 +15,7 @@ export const appRouter = router({
   chains: chainRouter,
   transaction: transactionRouter,
   search: searchRouter,
+  address: addressRouter,
 });
 
 export type AppRouter = typeof appRouter;

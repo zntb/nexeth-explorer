@@ -3,9 +3,8 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
 import { BlockDetailsTable } from "@/components/blocks";
-import { BlockTimeline } from "@/components/blocks/block-timeline";
+import { ExplorerButtonGroup } from "@/components/explorers";
 import { AppLayout, PageContainer } from "@/components/layouts";
-import { Separator } from "@/components/ui/separator";
 import { createChainLink, propsParser, slugToChain } from "@/lib";
 import { toTitleCase } from "@/lib/utils/to-title-case";
 import { getBlockRequestSchema } from "@/server";
@@ -14,7 +13,6 @@ import { appRouter } from "@/server/routers/router";
 const BlockPage = ({
   chain,
   block,
-  latestBlock,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => (
   <AppLayout>
     <PageContainer
@@ -24,13 +22,18 @@ const BlockPage = ({
         { name: `Block #${block.number}`, href: "" },
       ]}
     >
-      <BlockTimeline
+      <ExplorerButtonGroup
+        explorers={chain.explorers}
+        type="block"
+        location={block.number}
+      />
+      {/* <BlockTimeline
         selectedBlock={block}
         latestBlock={latestBlock}
         chain={chain}
-      />
+      /> */}
       <BlockDetailsTable block={block} chain={chain} />
-      <Separator />
+      {/* <Separator /> */}
       {/* <BlockTabs block={block} chain={chain} /> */}
     </PageContainer>
   </AppLayout>

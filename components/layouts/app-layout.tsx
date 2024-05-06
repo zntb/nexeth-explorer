@@ -45,7 +45,11 @@ export const PageContainer: FC<PropsWithChildren<PageContainerProps>> = ({
   >
     {showBreadcrumbs && <PageBreadcrumbs breadcrumbs={breadcrumbs} />}
 
-    {title && <Typography variant="h1">{title}</Typography>}
+    {title && (
+      <Typography variant="h1" className="text-[2rem] md:text-5xl">
+        {title}
+      </Typography>
+    )}
     {description && (
       <Typography variant="p" effect="muted">
         {description}

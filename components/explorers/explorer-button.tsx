@@ -7,10 +7,12 @@ import { Button } from "../ui/button";
 
 import { toTitleCase } from "@/lib";
 
+export type ExplorerLinkType = "tx" | "address" | "block";
+
 export interface ExplorerButtonProps {
   explorer: ChainExplorer;
-  type?: "tx" | "address";
-  location?: string;
+  type?: ExplorerLinkType;
+  location?: string | number;
 }
 
 export const ExplorerButton: FC<ExplorerButtonProps> = ({
@@ -37,3 +39,26 @@ export const ExplorerButton: FC<ExplorerButtonProps> = ({
     </Link>
   );
 };
+
+export interface ExplorerButtonGroupProps {
+  explorers?: ChainExplorer[] | readonly ChainExplorer[];
+  type?: ExplorerLinkType;
+  location?: string | number;
+}
+
+export const ExplorerButtonGroup: FC<ExplorerButtonGroupProps> = ({
+  explorers,
+  type,
+  location,
+}) => (
+  <div className="flex gap-2">
+    {explorers?.map((explorer) => (
+      <ExplorerButton
+        key={explorer.name}
+        explorer={explorer}
+        type={type}
+        location={location}
+      />
+    ))}
+  </div>
+);

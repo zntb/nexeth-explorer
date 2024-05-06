@@ -1,8 +1,7 @@
 import { Chain } from "@thirdweb-dev/chains";
-import { Transaction } from "ethers";
 import { FC } from "react";
 
-import { DetailedTransactionTable } from "../transactions";
+import { TransactionsTable } from "../transactions";
 import {
   Card,
   CardHeader,
@@ -33,10 +32,8 @@ export const BlockTabs: FC<BlockTabsProps> = ({ block, chain }) => (
         </CardHeader>
         <CardContent className="space-y-2">
           {block.transactions.length > 0 ? (
-            <DetailedTransactionTable
-              transactions={block.transactions.map(
-                (hash) => ({ hash } as Transaction)
-              )}
+            <TransactionsTable
+              transactions={[]} // TODO: add transactions
               chain={chain}
             />
           ) : (

@@ -33,12 +33,17 @@ const IpfsPage = ({
           <CommandOpenAction
             search="ipfs://QmP1jrs58rvbfBkRAu4Q5HLck3vkDX5F1zujz1srhh9hDw/nexeth-logo-transparent.png"
             icon={<SiIpfs />}
-            label="Nexeth Logo in IPFS"
+            label="An Image in IPFS"
           />
           <CommandOpenAction
             search="Qmcd7D6TnnzZzsk12DBwCMRYx1a8TVX4tq4eemYqspL4Rv"
             icon={<SiIpfs />}
-            label="A video in IPFS"
+            label="A Video in IPFS"
+          />
+          <CommandOpenAction
+            search="QmYeBBCH5G1NZiUrC2UbT8CTAoQsFp9mm8B3e7KKCbwbfB"
+            icon={<SiIpfs />}
+            label="A JSON File in IPFS"
           />
         </div>
       </div>
