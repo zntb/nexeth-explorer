@@ -1,5 +1,4 @@
 import {
-  ThirdwebAuthConfig,
   coinbaseWallet,
   localWallet,
   metamaskWallet,
@@ -23,10 +22,10 @@ export const useProviderConfig = () => {
     url: getBaseUrl(),
   };
 
-  const authConfig: ThirdwebAuthConfig = {
-    domain: getBaseUrl(),
-    authUrl: "/api/auth",
-  };
+  // const authConfig: ThirdwebAuthConfig = {
+  //   domain: getBaseUrl(),
+  //   authUrl: "/api/auth",
+  // };
 
   const supportedWallets = [
     metamaskWallet({ projectId }),
@@ -43,6 +42,6 @@ export const useProviderConfig = () => {
     activeChain,
     dAppMetadata,
     supportedWallets,
-    authConfig,
+    // authConfig,
   };
 };

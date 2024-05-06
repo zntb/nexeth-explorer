@@ -11,30 +11,20 @@ export const navigationConfig: NavigationItem[] = [
     label: "Home",
     href: "/",
   },
-  // {
-  //   label: "Blockchain",
-  //   href: "/blockchain",
-  //   children: [
-  //     {
-  //       label: "Alert Dialog",
-  //       href: "/docs/primitives/alert-dialog",
-  //       description:
-  //         "A modal dialog that interrupts the user with important content and expects a response.",
-  //     },
-  //     {
-  //       label: "Hover Card",
-  //       href: "/docs/primitives/hover-card",
-  //       description:
-  //         "For sighted users to preview content available behind a link.",
-  //     },
-  //   ],
-  // },
   {
-    label: "Chains",
-    href: "/chains",
-  },
-  {
-    label: "Dashboards",
-    href: "/dashboards",
+    label: "Explore",
+    href: "/",
+    children: [
+      {
+        label: "Chains",
+        href: "/chains",
+        description: "Explore available chains and testnets.",
+      },
+      {
+        label: "Dashboards",
+        href: "/dashboards",
+        description: "All of your Ethereum related dashboards in one place.",
+      },
+    ],
   },
 ];

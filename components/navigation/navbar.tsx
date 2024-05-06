@@ -1,13 +1,10 @@
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import Image from "next/image";
 import Link from "next/link";
 
 import { useDisclosure, useMobileDesktop } from "../hooks";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "../ui/accordion";
+import { nexethLogoTransparent } from "../images";
+import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { Sheet, SheetContent, SheetTitle, SheetTrigger } from "../ui/sheet";
 
@@ -70,48 +67,50 @@ const MobileNavbar = () => {
         </Button>
       </SheetTrigger>
       <SheetContent side="left">
-        <SheetTitle>Nexeth</SheetTitle>
-        <NavigationMenu>
-          <NavigationMenuList className="flex flex-col items-start content-start">
-            {navigationConfig.map((item) =>
-              item.children && item.children.length > 0 ? (
-                <Accordion
-                  type="single"
-                  collapsible
-                  key={item.href}
-                  className="w-full"
-                >
-                  <AccordionItem value={item.href} dir="rtl">
-                    <AccordionTrigger>{item.label}</AccordionTrigger>
-                    <AccordionContent>
-                      {[item, ...item.children].map((child) => (
-                        <NavigationMenuItem key={child.href} className="">
-                          <Link href={child.href} legacyBehavior passHref>
-                            <NavigationMenuLink
-                              className={navigationMenuTriggerStyle()}
-                            >
-                              {child.label}
-                            </NavigationMenuLink>
-                          </Link>
-                        </NavigationMenuItem>
-                      ))}
-                    </AccordionContent>
-                  </AccordionItem>
-                </Accordion>
-              ) : (
-                <NavigationMenuItem key={item.href}>
-                  <Link href={item.href} legacyBehavior passHref>
-                    <NavigationMenuLink
-                      className={navigationMenuTriggerStyle()}
-                    >
-                      {item.label}
-                    </NavigationMenuLink>
+        <SheetTitle className="flex flex-row gap-4 items-center">
+          <div className="relative">
+            <Image
+              src={nexethLogoTransparent}
+              alt="Nexeth Logo"
+              width={40}
+              height={40}
+            />
+            <Badge
+              variant="secondary"
+              className="text-[8px] opacity-80 px-1 h-4 absolute top-0 left-5"
+            >
+              Beta
+            </Badge>
+          </div>
+          Nexeth
+        </SheetTitle>
+        <div className="flex flex-col items-start pt-2">
+          {navigationConfig.map((item) =>
+            item.children && item.children.length > 0 ? (
+              <>
+                <Button key={item.href} variant="ghost">
+                  {item.label}
+                </Button>
+                {item.children.map((child) => (
+                  <Link
+                    key={child.href}
+                    href={child.href}
+                    legacyBehavior
+                    passHref
+                  >
+                    <Button variant="ghost" className="ml-4">
+                      {child.label}
+                    </Button>
                   </Link>
-                </NavigationMenuItem>
-              )
-            )}
-          </NavigationMenuList>
-        </NavigationMenu>
+                ))}
+              </>
+            ) : (
+              <Link key={item.href} href={item.href}>
+                <Button variant="ghost">{item.label}</Button>
+              </Link>
+            )
+          )}
+        </div>
       </SheetContent>
     </Sheet>
   );
