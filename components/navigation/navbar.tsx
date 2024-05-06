@@ -2,6 +2,7 @@ import { HamburgerMenuIcon } from "@radix-ui/react-icons";
 import Image from "next/image";
 import Link from "next/link";
 
+import { CommandSearch } from "../command-palette";
 import { useDisclosure, useMobileDesktop } from "../hooks";
 import { nexethLogoTransparent } from "../images";
 import { Badge } from "../ui/badge";
@@ -84,7 +85,8 @@ const MobileNavbar = () => {
           </div>
           Nexeth
         </SheetTitle>
-        <div className="flex flex-col items-start pt-2">
+
+        <div className="flex flex-col items-start pt-2 pb-4">
           {navigationConfig.map((item) =>
             item.children && item.children.length > 0 ? (
               <>
@@ -111,6 +113,11 @@ const MobileNavbar = () => {
             )
           )}
         </div>
+
+        <CommandSearch
+          label="🔍 Search for an address or transaction"
+          className="w-full px-2"
+        />
       </SheetContent>
     </Sheet>
   );
