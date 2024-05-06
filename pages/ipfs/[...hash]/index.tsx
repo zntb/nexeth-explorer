@@ -1,19 +1,25 @@
 import { Ethereum } from "@thirdweb-dev/chains";
 import { useResolvedMediaType } from "@thirdweb-dev/react";
 import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
+import Link from "next/link";
 
 import { AppLayout, PageContainer } from "@/components/layouts";
-import { AspectRatio } from "@/components/ui/aspect-ratio";
 import { Card } from "@/components/ui/card";
 import { KeyValueTable } from "@/components/ui/key-value-table";
-import { isIpfsSearch, propsParser, shortenString } from "@/lib";
+import {
+  getIpfsCidVersion,
+  isIpfsSearch,
+  propsParser,
+  shortenString,
+} from "@/lib";
 import { serverThirdWebSDK } from "@/lib/services/thirdweb-sdk.service";
 
 const IpfsPage = ({
+  ipfsUrl,
   hash,
   scheme,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
-  const { url, mimeType } = useResolvedMediaType(hash);
+  const { mimeType } = useResolvedMediaType(ipfsUrl);
 
   return (
     <AppLayout>
@@ -25,16 +31,19 @@ const IpfsPage = ({
           <KeyValueTable
             data={{
               Hash: hash,
+              "CID Version": getIpfsCidVersion(hash),
               "Media Type": mimeType,
-              "IPFS URL": url,
+              "Gateway URL": (
+                <Link href={scheme} target="_blank">
+                  {scheme}
+                </Link>
+              ),
             }}
           />
         </Card>
 
-        <Card className="overflow-hidden">
-          <AspectRatio ratio={1}>
-            <iframe className="w-full h-full" src={scheme} />
-          </AspectRatio>
+        <Card className="overflow-hidden min-h-[300px]">
+          <iframe className="w-full h-full min-h-[600px]" src={scheme} />
         </Card>
       </PageContainer>
     </AppLayout>
@@ -47,7 +56,8 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const hash = ctx.resolvedUrl.replace("/ipfs/", "");
   const { storage } = serverThirdWebSDK(Ethereum);
   const isValid = isIpfsSearch(hash);
-  const scheme = storage.resolveScheme(`ipfs://${hash}`);
+  const ipfsUrl = `ipfs://${hash}`;
+  const scheme = storage.resolveScheme(ipfsUrl);
 
   if (!isValid) {
     return {
@@ -59,6 +69,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
 
   return {
     props: propsParser({
+      ipfsUrl,
       hash,
       scheme,
     }),
