@@ -9,6 +9,7 @@ import {
 } from "@thirdweb-dev/chains";
 import { FC } from "react";
 import { FaEthereum } from "react-icons/fa";
+import { SiIpfs } from "react-icons/si";
 
 import { ChainIcon } from "../chains";
 import { CommandOpenAction } from "../command-palette";
@@ -114,6 +115,11 @@ export const Hero: FC = () => (
         search="Polygon"
         icon={<ChainIcon chain={Polygon} size={15} />}
         label="Polygon"
+      />
+      <CommandOpenAction
+        search="ipfs://QmP1jrs58rvbfBkRAu4Q5HLck3vkDX5F1zujz1srhh9hDw/nexeth-logo-transparent.png"
+        icon={<SiIpfs />}
+        label="IPFS Resolver"
       />
     </div>
   </div>

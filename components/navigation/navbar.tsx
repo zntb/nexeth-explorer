@@ -89,10 +89,8 @@ const MobileNavbar = () => {
         <div className="flex flex-col items-start pt-2 pb-4">
           {navigationConfig.map((item) =>
             item.children && item.children.length > 0 ? (
-              <>
-                <Button key={item.href} variant="ghost">
-                  {item.label}
-                </Button>
+              <div key={item.href} className="flex flex-col items-start">
+                <Button variant="ghost">{item.label}</Button>
                 {item.children.map((child) => (
                   <Link
                     key={child.href}
@@ -105,7 +103,7 @@ const MobileNavbar = () => {
                     </Button>
                   </Link>
                 ))}
-              </>
+              </div>
             ) : (
               <Link key={item.href} href={item.href}>
                 <Button variant="ghost">{item.label}</Button>

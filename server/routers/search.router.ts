@@ -8,6 +8,8 @@ import {
   createTransactionLink,
   detectContractChains,
   detectTxChain,
+  getIpfsHash,
+  isIpfsSearch,
   isTransactionHash,
   shortenString,
 } from "@/lib";
@@ -75,6 +77,20 @@ export const searchRouter = router({
             href: `/address/${chain.slug}/${query}`,
             chain: chain.slug,
           })),
+        };
+      }
+
+      if (isIpfsSearch(query)) {
+        const ipfsQuery = getIpfsHash(query);
+
+        return {
+          results: [
+            {
+              title: `IPFS Hash: ${shortenString(ipfsQuery)}`,
+              type: "ipfs",
+              href: `/ipfs/${ipfsQuery}`,
+            },
+          ],
         };
       }
 

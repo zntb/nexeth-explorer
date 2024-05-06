@@ -18,7 +18,7 @@ import { Skeleton } from "../ui/skeleton";
 import { useCommandPaletteStore as useCommandPalette } from "./command-palette-store";
 import { CommandProps, navigationCommands } from "./commands";
 
-import { isTransactionHash, slugToChain } from "@/lib";
+import { isIpfsSearch, isTransactionHash, slugToChain } from "@/lib";
 import { trpc } from "@/server";
 
 export const useCommands = () => {
@@ -29,7 +29,11 @@ export const useCommands = () => {
   const { query } = useCommandPalette();
 
   const isSearchable = useMemo(
-    () => isAddress(query) || isTransactionHash(query) || isEnsName(query),
+    () =>
+      isAddress(query) ||
+      isTransactionHash(query) ||
+      isEnsName(query) ||
+      isIpfsSearch(query),
     [query]
   );
 
