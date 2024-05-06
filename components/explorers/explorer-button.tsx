@@ -5,9 +5,7 @@ import { FC } from "react";
 
 import { Button } from "../ui/button";
 
-import { toTitleCase } from "@/lib";
-
-export type ExplorerLinkType = "tx" | "address" | "block";
+import { ExplorerLinkType, createExplorerUrl, toTitleCase } from "@/lib";
 
 export interface ExplorerButtonProps {
   explorer: ChainExplorer;
@@ -19,26 +17,25 @@ export const ExplorerButton: FC<ExplorerButtonProps> = ({
   explorer,
   type,
   location,
-}) => {
-  const url =
-    type && location ? `${explorer.url}/${type}/${location}` : explorer.url;
-
-  return (
-    <Link href={url} target="_blank" rel="noopener noreferrer">
-      <Button
-        size="xs"
-        variant="secondary"
-        className="flex items-center gap-1 font-light pl-1 justify-between w-full"
-      >
-        <div className="flex gap-1">
-          🌐
-          <span>{toTitleCase(explorer.name)}</span>
-        </div>
-        <ExternalLinkIcon className="w-3 h-3" />
-      </Button>
-    </Link>
-  );
-};
+}) => (
+  <Link
+    href={createExplorerUrl({ explorer, type, location })}
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    <Button
+      size="xs"
+      variant="secondary"
+      className="flex items-center gap-1 font-light pl-1 justify-between w-full"
+    >
+      <div className="flex gap-1">
+        🌐
+        <span>{toTitleCase(explorer.name)}</span>
+      </div>
+      <ExternalLinkIcon className="w-3 h-3" />
+    </Button>
+  </Link>
+);
 
 export interface ExplorerButtonGroupProps {
   explorers?: ChainExplorer[] | readonly ChainExplorer[];

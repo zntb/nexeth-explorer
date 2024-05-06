@@ -1,4 +1,4 @@
-import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
+import { ExternalLinkIcon, MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import {
   isEnsName,
   useDisconnect,
@@ -132,6 +132,7 @@ const Command: FC<CommandProps & { prefetch?: boolean }> = ({
   callback,
   chain,
   prefetch = false,
+  external,
 }) => {
   const router = useRouter();
   const { onClose, setQuery } = useCommandPalette();
@@ -143,7 +144,10 @@ const Command: FC<CommandProps & { prefetch?: boolean }> = ({
   const onCommand = () => {
     onClose();
     setQuery("");
-    if (href) router.push(href);
+    if (href) {
+      if (external) return window.open(href, "_blank");
+      router.push(href);
+    }
     if (callback) callback();
   };
 
@@ -156,6 +160,8 @@ const Command: FC<CommandProps & { prefetch?: boolean }> = ({
     >
       {chain ? <ChainIcon chain={slugToChain(chain)} size={20} /> : icon}
       <span>{title}</span>
+      <div className="flex-1" />
+      {external && <ExternalLinkIcon />}
     </CommandItem>
   );
 };

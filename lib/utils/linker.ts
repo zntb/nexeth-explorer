@@ -1,4 +1,4 @@
-import { Chain } from "@thirdweb-dev/chains";
+import { Chain, ChainExplorer } from "@thirdweb-dev/chains";
 
 export const createBlockLink = ({
   chain,
@@ -26,3 +26,15 @@ export const createAddressLink = ({
   chain: Chain;
   address: string;
 }) => `/address/${chain.slug}/${address}`;
+
+export type ExplorerLinkType = "tx" | "address" | "block";
+
+export const createExplorerUrl = ({
+  explorer,
+  type,
+  location,
+}: {
+  explorer: ChainExplorer;
+  type?: string;
+  location?: string | number;
+}) => (type && location ? `${explorer.url}/${type}/${location}` : explorer.url);

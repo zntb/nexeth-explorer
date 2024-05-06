@@ -10,6 +10,7 @@ export interface CommandProps {
   href?: string;
   callback?: () => void;
   chain?: string;
+  external?: boolean;
 }
 
 export const navigationCommands: CommandProps[] = [

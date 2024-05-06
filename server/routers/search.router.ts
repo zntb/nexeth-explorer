@@ -2,9 +2,14 @@ import { isEnsName, resolveEns } from "@thirdweb-dev/react";
 import { isAddress } from "ethers/lib/utils";
 
 import { procedure, router } from "../router-procedures";
-import { searchRequestSchema, searchResponseSchema } from "../schema";
+import {
+  SearchItem,
+  searchRequestSchema,
+  searchResponseSchema,
+} from "../schema";
 
 import {
+  createExplorerUrl,
   createTransactionLink,
   detectContractChains,
   detectTxChain,
@@ -12,6 +17,7 @@ import {
   isIpfsSearch,
   isTransactionHash,
   shortenString,
+  toTitleCase,
 } from "@/lib";
 
 export const searchRouter = router({
@@ -28,16 +34,30 @@ export const searchRouter = router({
 
         if (!chain) return { results: [] };
 
-        return {
-          results: [
-            {
-              title: `${chain.name} Transaction: ${shortenString(query)}`,
-              type: "transaction",
-              href: createTransactionLink({ chain, hash: query }),
-              chain: chain.slug,
-            },
-          ],
-        };
+        const results: SearchItem[] = [
+          {
+            title: `${chain.name} Transaction: ${shortenString(query)}`,
+            type: "transaction",
+            href: createTransactionLink({ chain, hash: query }),
+            chain: chain.slug,
+          },
+        ];
+
+        const explorer = chain.explorers?.[0];
+
+        if (explorer) {
+          results.push({
+            title: `${chain.name} Transaction: ${shortenString(
+              query
+            )} (${toTitleCase(explorer.name)})`,
+            type: "transaction",
+            href: createExplorerUrl({ explorer, type: "tx", location: query }),
+            external: true,
+            chain: chain.slug,
+          });
+        }
+
+        return { results };
       }
 
       let ensName: string | undefined = undefined;
@@ -68,16 +88,38 @@ export const searchRouter = router({
           };
         }
 
-        return {
-          results: chains.map((chain) => ({
+        const results: SearchItem[] = [];
+
+        chains.map((chain) => {
+          results.push({
             title: `${chain.name} Contract:${
               ensName ? ` (${ensName})` : ""
             } ${shortenString(query)}`,
             type: "contract",
             href: `/address/${chain.slug}/${query}`,
             chain: chain.slug,
-          })),
-        };
+          });
+
+          const explorer = chain.explorers?.[0];
+
+          if (explorer) {
+            results.push({
+              title: `${chain.name} Contract:${
+                ensName ? ` (${ensName})` : ""
+              } ${shortenString(query)} (${toTitleCase(explorer.name)})`,
+              type: "contract",
+              href: createExplorerUrl({
+                explorer,
+                type: "address",
+                location: query,
+              }),
+              external: true,
+              chain: chain.slug,
+            });
+          }
+        });
+
+        return { results };
       }
 
       if (isIpfsSearch(query)) {

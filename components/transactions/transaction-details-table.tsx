@@ -1,14 +1,16 @@
 import { Chain } from "@thirdweb-dev/chains";
 import { Transaction } from "ethers";
 import { formatEther, formatUnits } from "ethers/lib/utils";
-import Link from "next/link";
 import { FC } from "react";
 
+import { LinkedAddress } from "../address";
+import { LinkedBlock } from "../blocks";
 import { LinkedChainIcon } from "../chains";
 import { Card } from "../ui/card";
+import { CopyItem } from "../ui/copy-item";
 import { KeyValueTable } from "../ui/key-value-table";
 
-import { createBlockLink, shortenString } from "@/lib";
+import { shortenString } from "@/lib";
 
 export interface TransactionDetailsTableProps {
   transaction: Transaction;
@@ -27,13 +29,11 @@ export const TransactionDetailsTable: FC<TransactionDetailsTableProps> = ({
     <Card>
       <KeyValueTable
         data={{
-          Hash: transaction.hash,
-          "Block Number": (
-            <Link href={createBlockLink({ chain, block })}>{block}</Link>
-          ),
+          Hash: <CopyItem item={transaction.hash}>{transaction.hash}</CopyItem>,
+          "Block Number": <LinkedBlock chain={chain} block={block} />,
           Chain: <LinkedChainIcon chain={chain} />,
-          From: transaction.from,
-          To: transaction.to,
+          From: <LinkedAddress chain={chain} address={transaction.from} />,
+          To: <LinkedAddress chain={chain} address={transaction.to} />,
           Data: shortenString(transaction.data),
           Value: formatEther(transaction.value),
           "Gas Price": `${formatUnits(transaction.gasPrice ?? 0, "gwei")} Gwei`,
