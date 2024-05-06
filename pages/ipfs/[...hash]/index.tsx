@@ -14,7 +14,7 @@ import {
 } from "@/lib";
 import { serverThirdWebSDK } from "@/lib/services/thirdweb-sdk.service";
 
-const IpfsPage = ({
+const IpfsHashPage = ({
   ipfsUrl,
   hash,
   scheme,
@@ -25,7 +25,10 @@ const IpfsPage = ({
     <AppLayout>
       <PageContainer
         title="IPFS Hash"
-        breadcrumbs={[{ name: shortenString(hash), href: `/ipfs/${hash}` }]}
+        breadcrumbs={[
+          { name: "IPFS", href: "/ipfs" },
+          { name: shortenString(hash), href: `/ipfs/${hash}` },
+        ]}
       >
         <Card>
           <KeyValueTable
@@ -50,7 +53,7 @@ const IpfsPage = ({
   );
 };
 
-export default IpfsPage;
+export default IpfsHashPage;
 
 export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
   const hash = ctx.resolvedUrl.replace("/ipfs/", "");
@@ -64,8 +67,6 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
       notFound: true,
     };
   }
-
-  console.log({ hash, scheme });
 
   return {
     props: propsParser({

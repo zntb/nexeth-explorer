@@ -1,5 +1,6 @@
 import { DashboardIcon, HomeIcon } from "@radix-ui/react-icons";
 import { FaEthereum } from "react-icons/fa";
+import { SiIpfs } from "react-icons/si";
 
 import { supportedChainsAndTestnets } from "@/lib";
 
@@ -26,6 +27,11 @@ export const navigationCommands: CommandProps[] = [
     title: "Chains",
     href: "/chains",
     icon: <FaEthereum />,
+  },
+  {
+    title: "IPFS",
+    href: "/ipfs",
+    icon: <SiIpfs />,
   },
   ...supportedChainsAndTestnets.map((chain) => ({
     title: `Chains / ${chain.name}`,

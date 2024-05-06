@@ -101,6 +101,7 @@ export const Hero: FC = () => (
           "0x13b7be01de58e2e4b4d8078f03609afdccc5c7f6dd56ef1adec7d70659dec179"
         )}`}
       />
+      <CommandOpenAction search="ipfs" icon={<SiIpfs />} label="IPFS Stats" />
       <CommandOpenAction
         search="0x4200000000000000000000000000000000000006"
         icon={<FaEthereum />}

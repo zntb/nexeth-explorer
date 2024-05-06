@@ -6,3 +6,4 @@ export * from "./dashboard.schema";
 export * from "./chain.schema";
 export * from "./transaction.schema";
 export * from "./search.schema";
+export * from "./ipfs.schema";

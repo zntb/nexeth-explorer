@@ -25,6 +25,11 @@ export const navigationConfig: NavigationItem[] = [
         href: "/dashboards",
         description: "All of your Ethereum related dashboards in one place.",
       },
+      {
+        label: "IPFS",
+        href: "/ipfs",
+        description: "Explore IPFS stats and view IPFS data.",
+      },
     ],
   },
 ];
