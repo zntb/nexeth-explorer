@@ -1,4 +1,11 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# @nexeth/explorer
+
+![preview](/public/preview.png)
+
+[explorer.nexeth.xyz](https://explorer.nexeth.xyz)
+
+Nexeth unifies your search across Ethereum and L2s (including testnets). Explore networks, tokens, NFTs, and transactions – all from a single powerful interface. Try entering an address, transaction hash, token name or ENS to get started. Open up the Command Menu at any time with `CMD + k`
+
 
 ## Getting Started
 
