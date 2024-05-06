@@ -19,15 +19,11 @@ import Typography from "../ui/typography";
 import { shortenString } from "@/lib";
 
 export const Hero: FC = () => (
-  <div className="flex flex-col items-center text-center gap-2 max-w-xl mx-auto mt-20">
+  <div className="flex flex-col items-center text-center gap-2 max-w-xl mx-auto">
     <Typography variant="h1" className="text-[80px]">
       Nexeth
     </Typography>
 
-    {/* <Typography variant="h3" className="font-light">
-      Explore Ethereum at the{" "}
-      <span className="font-bold">Speed of Thought</span>
-    </Typography> */}
     <div className="flex flex-col md:flex-row items-center gap-1">
       <Typography variant="h3" className="font-light">
         Blockchain Explorer.
@@ -40,8 +36,9 @@ export const Hero: FC = () => (
     <Typography effect="tiny">
       Nexeth unifies your search across Ethereum and L2s (including testnets).
       Explore networks, tokens, NFTs, and transactions – all from a single
-      powerful interface. Try entering an address, transaction hash, token name
-      or ENS to get started. Open up the Command Menu at any time with{" "}
+      powerful interface. If you prefer Etherscan or BlockScout, you are only a
+      click away via a search command. Try entering an address, transaction
+      hash, or ENS to get started. Open up the Command Menu at any time with{" "}
       <CommandKeys />
     </Typography>
     <div className="py-4 flex flex-col items-center">
