@@ -2,45 +2,35 @@ import { Chain } from "@thirdweb-dev/chains";
 import { FC } from "react";
 
 import { TransactionsTable } from "../transactions";
-import {
-  Card,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-  CardContent,
-} from "../ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "../ui/tabs";
 
-import { Block } from "@/server";
+import { Block, LiteTransaction } from "@/server";
 
 export interface BlockTabsProps {
   block: Block;
+  transactions: LiteTransaction[];
   chain: Chain;
 }
 
-export const BlockTabs: FC<BlockTabsProps> = ({ block, chain }) => (
+export const BlockTabs: FC<BlockTabsProps> = ({
+  block,
+  transactions,
+  chain,
+}) => (
   <Tabs defaultValue="transactions">
     <TabsList className="grid w-full grid-cols-2">
       <TabsTrigger value="transactions">Transactions</TabsTrigger>
-      <TabsTrigger value="test">Test</TabsTrigger>
     </TabsList>
     <TabsContent value="transactions">
-      <Card>
-        <CardHeader>
-          <CardTitle>Transactions</CardTitle>
-          <CardDescription>Transactions in this block</CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-2">
-          {block.transactions.length > 0 ? (
-            <TransactionsTable
-              transactions={[]} // TODO: add transactions
-              chain={chain}
-            />
-          ) : (
-            <p>No transactions in this block</p>
-          )}
-        </CardContent>
-      </Card>
+      {block.transactions.length > 0 ? (
+        <TransactionsTable
+          transactions={transactions}
+          chain={chain}
+          hide={{ block: true, type: true, token: true, value: true }}
+        />
+      ) : (
+        <p>No transactions in this block</p>
+      )}
     </TabsContent>
   </Tabs>
 );

@@ -2,6 +2,7 @@ import { ArrowRightIcon } from "@radix-ui/react-icons";
 import { Chain } from "@thirdweb-dev/chains";
 
 import { LinkedAddress } from "../address";
+import { LinkedBlock } from "../blocks";
 import { Badge } from "../ui/badge";
 import { Card } from "../ui/card";
 import { Skeleton } from "../ui/skeleton";
@@ -23,6 +24,7 @@ export interface TransactionsTableProps {
   transactions: LiteTransaction[];
   chain: Chain;
   isLoading?: boolean;
+  hide?: Record<string, boolean>;
 }
 
 export const TransactionsTable: React.FC<TransactionsTableProps> = ({
@@ -30,18 +32,20 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
   transactions,
   chain,
   isLoading,
+  hide = {},
 }) => (
   <Card>
     <Table className="w-full">
       <TableHeader>
         <TableRow>
-          <TableHead className="w-4">Hash</TableHead>
-          <TableHead className="w-8">Method</TableHead>
-          <TableHead className="w-2">Type</TableHead>
-          <TableHead className="w-16">From</TableHead>
-          {address && <TableHead className="w-8"></TableHead>}
-          <TableHead className="w-16">To</TableHead>
-          <TableHead className="w-4">Value</TableHead>
+          {!hide.block && <TableHead className="">Block</TableHead>}
+          {!hide.hash && <TableHead className="">Hash</TableHead>}
+          {!hide.type && <TableHead className="">Method</TableHead>}
+          {!hide.token && <TableHead className="">Type</TableHead>}
+          {!hide.from && <TableHead className="">From</TableHead>}
+          {!hide.arrow && <TableHead className=""></TableHead>}
+          {!hide.to && <TableHead className="">To</TableHead>}
+          {!hide.value && <TableHead className="">Value</TableHead>}
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -50,47 +54,64 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
         ) : transactions ? (
           transactions.map((transaction) => (
             <TableRow key={transaction.hash}>
-              <TableCell>
-                <LinkedTransaction
-                  chain={chain}
-                  hash={transaction.hash}
-                  short
-                />
-              </TableCell>
-              <TableCell>
-                <Badge variant="secondary">
-                  {transaction.type.toUpperCase()}
-                </Badge>
-              </TableCell>
-              <TableCell>
-                <Badge>{transaction.token.toUpperCase()}</Badge>
-              </TableCell>
-              <TableCell>
-                <LinkedAddress
-                  chain={chain}
-                  address={transaction.from}
-                  short
-                  highlight={matchingAddresses(address, transaction.from)}
-                />
-              </TableCell>
-              {address && (
+              {!hide.block && (
+                <TableCell>
+                  <LinkedBlock chain={chain} block={transaction.blockNumber} />
+                </TableCell>
+              )}
+              {!hide.hash && (
+                <TableCell>
+                  <LinkedTransaction
+                    chain={chain}
+                    hash={transaction.hash}
+                    short
+                  />
+                </TableCell>
+              )}
+              {!hide.type && (
+                <TableCell>
+                  <Badge variant="secondary">
+                    {transaction.type?.toUpperCase()}
+                  </Badge>
+                </TableCell>
+              )}
+              {!hide.token && (
+                <TableCell>
+                  <Badge>{transaction.token?.toUpperCase()}</Badge>
+                </TableCell>
+              )}
+              {!hide.from && (
+                <TableCell>
+                  <LinkedAddress
+                    chain={chain}
+                    address={transaction.from}
+                    short
+                    highlight={matchingAddresses(address, transaction.from)}
+                  />
+                </TableCell>
+              )}
+              {!hide.arrow && (
                 <TableCell>
                   <ArrowRightIcon />
                 </TableCell>
               )}
-              <TableCell>
-                <LinkedAddress
-                  chain={chain}
-                  address={transaction.to}
-                  short
-                  highlight={matchingAddresses(address, transaction.to)}
-                />
-              </TableCell>
-              <TableCell>
-                {transaction.value
-                  ? `${transaction.value} ${chain.nativeCurrency.symbol}`
-                  : "-"}
-              </TableCell>
+              {!hide.to && (
+                <TableCell>
+                  <LinkedAddress
+                    chain={chain}
+                    address={transaction.to}
+                    short
+                    highlight={matchingAddresses(address, transaction.to)}
+                  />
+                </TableCell>
+              )}
+              {!hide.value && (
+                <TableCell>
+                  {transaction.value
+                    ? `${transaction.value} ${chain.nativeCurrency.symbol}`
+                    : "-"}
+                </TableCell>
+              )}
             </TableRow>
           ))
         ) : (
@@ -104,17 +125,17 @@ export const TransactionsTable: React.FC<TransactionsTableProps> = ({
 const LoadingRows = () => (
   <>
     <TableRow>
-      <TableCell colSpan={7}>
+      <TableCell colSpan={8}>
         <Skeleton className="w-full h-8" />
       </TableCell>
     </TableRow>
     <TableRow>
-      <TableCell colSpan={7}>
+      <TableCell colSpan={8}>
         <Skeleton className="w-full h-8" />
       </TableCell>
     </TableRow>{" "}
     <TableRow>
-      <TableCell colSpan={7}>
+      <TableCell colSpan={8}>
         <Skeleton className="w-full h-8" />
       </TableCell>
     </TableRow>
@@ -123,6 +144,6 @@ const LoadingRows = () => (
 
 const EmptyRows = () => (
   <TableRow>
-    <TableCell colSpan={7}>No transactions found.</TableCell>
+    <TableCell colSpan={8}>No transactions found.</TableCell>
   </TableRow>
 );

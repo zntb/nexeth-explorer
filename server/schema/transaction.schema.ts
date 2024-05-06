@@ -10,8 +10,8 @@ export const liteTransactionSchema = z.object({
   blockNumber: z.number(),
   from: z.string().optional(),
   to: z.string().optional(),
-  type: z.string(),
-  token: z.string(),
+  type: z.string().optional(),
+  token: z.string().optional(),
   value: z.number().optional(),
 });
 export type LiteTransaction = z.infer<typeof liteTransactionSchema>;
@@ -37,6 +37,7 @@ export type GetBlockRequest = z.infer<typeof getBlockRequestSchema>;
 export const getBlockResponseSchema = z.object({
   block: z.custom<EthersBlock>(),
   latestBlock: z.custom<EthersBlock>(),
+  transactions: z.array(liteTransactionSchema),
 });
 export type GetBlockResponse = z.infer<typeof getBlockResponseSchema>;
 

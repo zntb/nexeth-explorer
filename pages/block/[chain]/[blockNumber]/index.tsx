@@ -3,6 +3,7 @@ import { GetServerSidePropsContext, InferGetServerSidePropsType } from "next";
 import SuperJSON from "superjson";
 
 import { BlockDetailsTable } from "@/components/blocks";
+import { BlockTabs } from "@/components/blocks/block-tabs";
 import { ExplorerButtonGroup } from "@/components/explorers";
 import { AppLayout, PageContainer } from "@/components/layouts";
 import { createChainLink, propsParser, slugToChain } from "@/lib";
@@ -11,8 +12,9 @@ import { getBlockRequestSchema } from "@/server";
 import { appRouter } from "@/server/routers/router";
 
 const BlockPage = ({
-  chain,
   block,
+  transactions,
+  chain,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => (
   <AppLayout>
     <PageContainer
@@ -33,8 +35,7 @@ const BlockPage = ({
         chain={chain}
       /> */}
       <BlockDetailsTable block={block} chain={chain} />
-      {/* <Separator /> */}
-      {/* <BlockTabs block={block} chain={chain} /> */}
+      <BlockTabs block={block} transactions={transactions} chain={chain} />
     </PageContainer>
   </AppLayout>
 );
@@ -50,10 +51,11 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     transformer: SuperJSON,
   });
 
-  const { block, latestBlock } = await router.transaction.getBlock.fetch({
-    chain,
-    blockNumber,
-  });
+  const { block, transactions, latestBlock } =
+    await router.transaction.getBlock.fetch({
+      chain,
+      blockNumber,
+    });
 
   if (!block) {
     return {
@@ -65,6 +67,7 @@ export const getServerSideProps = async (ctx: GetServerSidePropsContext) => {
     props: propsParser({
       block,
       latestBlock,
+      transactions,
       chain: slugToChain(chain),
     }),
   };
