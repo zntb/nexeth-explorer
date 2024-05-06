@@ -2,6 +2,7 @@ import "@/styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
 import { ThirdwebProvider } from "@thirdweb-dev/react";
+import { Analytics } from "@vercel/analytics/react";
 import type { AppProps } from "next/app";
 import PageLoader from "nextjs-progressbar";
 import { ToastContainer } from "react-toastify";
@@ -9,7 +10,6 @@ import { ToastContainer } from "react-toastify";
 import { useProviderConfig } from "@/components/hooks";
 import { ThemeProvider } from "@/components/providers";
 import { trpc } from "@/server";
-
 const App = ({ Component, pageProps }: AppProps) => (
   <ThemeProvider>
     <ThirdwebProvider {...useProviderConfig()}>
@@ -26,6 +26,7 @@ const App = ({ Component, pageProps }: AppProps) => (
         theme="colored"
       />
       <PageLoader color="black" />
+      <Analytics />
       <Component {...pageProps} />
     </ThirdwebProvider>
   </ThemeProvider>
