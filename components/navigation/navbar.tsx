@@ -51,7 +51,6 @@ const DesktopNavbar = () => (
           ) : (
             <Link
               href={item.href}
-              legacyBehavior
               target={item.external ? "_blank" : undefined}
             >
               <NavigationMenuLink className={navigationMenuTriggerStyle()}>
