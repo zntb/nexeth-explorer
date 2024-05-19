@@ -14,7 +14,7 @@ const AppDocument = () => (
       <meta httpEquiv="Content-Language" content="en" />
 
       {/* Open Graph meta tags */}
-      <meta property="og:title" content="Nexeth - AI Pipelines Made Easy" />
+      <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:image" content={image} />
       <meta property="og:url" content={url} />
