@@ -2934,10 +2934,10 @@
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
   integrity sha512-zuVdFrMJiuCDQUMCzQaD6KL28MjnqqN8XnAqiEq9PNm/hCPTSGfrXCOfwj1ow4LFb/tNymJPwsNbVePc1xFqrQ==
 
-"@upstash/redis@^1.30.0":
-  version "1.30.0"
-  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.30.0.tgz#b9b5b4025ec7a45421dbb606d1bb32e2e932119d"
-  integrity sha512-bkxl2n7qls27hONXNyItM6ccRT0NBJ8c6zl83wx+TlODpYXehgeiUJTkcTaXLp7hk+zy6Mqpzpeo3GX+wZSvBw==
+"@upstash/redis@^1.33.0":
+  version "1.34.0"
+  resolved "https://registry.yarnpkg.com/@upstash/redis/-/redis-1.34.0.tgz#f32cd53ebeeafbba7eca10f8597a573d5a2fed0d"
+  integrity sha512-TrXNoJLkysIl8SBc4u9bNnyoFYoILpCcFJcLyWCccb/QSUmaVKdvY0m5diZqc3btExsapcMbaw/s/wh9Sf1pJw==
   dependencies:
     crypto-js "^4.2.0"
 
