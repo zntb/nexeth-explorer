@@ -3941,10 +3941,10 @@ bs58check@^2.1.2:
     create-hash "^1.1.0"
     safe-buffer "^5.1.2"
 
-bson@^6.4.0, bson@^6.5.0:
-  version "6.6.0"
-  resolved "https://registry.yarnpkg.com/bson/-/bson-6.6.0.tgz#f225137eb49fe19bee4d87949a0515c05176e2ad"
-  integrity sha512-BVINv2SgcMjL4oYbBuCQTpE3/VKOSxrOA8Cj/wQP7izSzlBGVomdm+TcUd0Pzy0ytLSSDweCKQ6X3f5veM5LQA==
+bson@^6.7.0:
+  version "6.8.0"
+  resolved "https://registry.yarnpkg.com/bson/-/bson-6.8.0.tgz#5063c41ba2437c2b8ff851b50d9e36cb7aaa7525"
+  integrity sha512-iOJg8pr7wq2tg/zSlCCHMi3hMm5JTOxLTagf3zxhcenHsFp+c6uOs6K7W5UE7A4QIJGtqh/ZovFNMP4mOPJynQ==
 
 buffer-equal-constant-time@1.0.1:
   version "1.0.1"
@@ -7192,27 +7192,27 @@ mongodb-connection-string-url@^3.0.0:
     "@types/whatwg-url" "^11.0.2"
     whatwg-url "^13.0.0"
 
-mongodb@6.5.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.5.0.tgz#3735b4fba085b26ca06f7744e9639bc538e93d87"
-  integrity sha512-Fozq68InT+JKABGLqctgtb8P56pRrJFkbhW0ux+x1mdHeyinor8oNzJqwLjV/t5X5nJGfTlluxfyMnOXNggIUA==
+mongodb@6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/mongodb/-/mongodb-6.7.0.tgz#f86e51e6530e6a2ca4a99d7cfdf6f409223ac199"
+  integrity sha512-TMKyHdtMcO0fYBNORiYdmM25ijsHs+Njs963r4Tro4OQZzqYigAzYQouwWRg4OIaiLRUEGUh/1UAcH5lxdSLIA==
   dependencies:
     "@mongodb-js/saslprep" "^1.1.5"
-    bson "^6.4.0"
+    bson "^6.7.0"
     mongodb-connection-string-url "^3.0.0"
 
-mongoose@^8.3.2:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.3.2.tgz#88d7eceecb1284c67c0d2e64d352442bc75f0aae"
-  integrity sha512-3JcpDjFI25cF/3xpu+4+9nM0lURQTNLcP86X83+LvuICdn453QQLmhSrUr2IPM/ffLiDE9KPl9slNb2s0hZPpg==
+mongoose@^8.5.1:
+  version "8.5.3"
+  resolved "https://registry.yarnpkg.com/mongoose/-/mongoose-8.5.3.tgz#4ab3a62173dc72a9263608a02947e19bf95604af"
+  integrity sha512-OubSDbsAclDFGHjV82MsKyIGQWFc42Ot1l+0dhRS6U9xODM7rm/ES/WpOQd8Ds9j0Mx8QzxZtrSCnBh6o9wUqw==
   dependencies:
-    bson "^6.5.0"
+    bson "^6.7.0"
     kareem "2.6.3"
-    mongodb "6.5.0"
+    mongodb "6.7.0"
     mpath "0.9.0"
     mquery "5.0.0"
     ms "2.1.3"
-    sift "16.0.1"
+    sift "17.1.3"
 
 motion@10.16.2:
   version "10.16.2"
@@ -8455,10 +8455,10 @@ side-channel@^1.0.4, side-channel@^1.0.6:
     get-intrinsic "^1.2.4"
     object-inspect "^1.13.1"
 
-sift@16.0.1:
-  version "16.0.1"
-  resolved "https://registry.yarnpkg.com/sift/-/sift-16.0.1.tgz#e9c2ccc72191585008cf3e36fc447b2d2633a053"
-  integrity sha512-Wv6BjQ5zbhW7VFefWusVP33T/EM0vYikCaQ2qR8yULbsilAT8/wQaXvuQ3ptGLpoKx+lihJE3y2UTgKDyyNHZQ==
+sift@17.1.3:
+  version "17.1.3"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-17.1.3.tgz#9d2000d4d41586880b0079b5183d839c7a142bf7"
+  integrity sha512-Rtlj66/b0ICeFzYTuNvX/EF1igRbbnGSvEyT79McoZa/DeGhMyC5pWKOEsZKnpkqtSeovd5FL/bjHWC3CIIvCQ==
 
 signal-exit@^4.0.1, signal-exit@^4.1.0:
   version "4.1.0"
