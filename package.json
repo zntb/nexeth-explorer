@@ -32,7 +32,7 @@
     "@trpc/next": "^10.45.0",
     "@trpc/react-query": "^10.45.0",
     "@trpc/server": "^10.45.0",
-    "@typegoose/typegoose": "^12.4.0",
+    "@typegoose/typegoose": "^12.6.0",
     "@upstash/redis": "^1.33.0",
     "@vercel/analytics": "^1.2.2",
     "alchemy-sdk": "^3.3.0",
