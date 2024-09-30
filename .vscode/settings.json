@@ -1,5 +1,14 @@
 {
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": "explicit"
-  }
+  },
+  "cSpell.words": [
+    "Arbitrum",
+    "Scroller",
+    "Sepolia",
+    "superjson",
+    "thirdweb",
+    "trpc",
+    "Zkevm"
+  ]
 }
