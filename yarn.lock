@@ -3429,10 +3429,10 @@ ajv@^6.12.4:
     json-schema-traverse "^0.4.1"
     uri-js "^4.2.2"
 
-alchemy-sdk@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.npmjs.org/alchemy-sdk/-/alchemy-sdk-3.4.1.tgz"
-  integrity sha512-GeL8J6VIiE7tIgXevkcm0VqdZnhO0EpOXQQCzUMsoMrj92hBKj9ZmUjyPxXF8tUdsHYixQApng2eJXoRWmv5lw==
+alchemy-sdk@^3.4.6:
+  version "3.5.0"
+  resolved "https://registry.yarnpkg.com/alchemy-sdk/-/alchemy-sdk-3.5.0.tgz#a4cab2f439d68348727c3a7ca6806e929c1e31bf"
+  integrity sha512-ggY7y+cM6hZKynU7mg6jBUhhAS/68kWn7dPYSyvl9TlCQZnKl3norZKLxbP972NmRDMCqKEDPyYJpvEC6kMj1w==
   dependencies:
     "@ethersproject/abi" "^5.7.0"
     "@ethersproject/abstract-provider" "^5.7.0"
