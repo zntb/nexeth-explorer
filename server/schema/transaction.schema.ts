@@ -1,6 +1,6 @@
-import { Block as EthersBlock } from "@ethersproject/abstract-provider";
-import { Transaction } from "ethers";
-import { z } from "zod";
+import { Block as EthersBlock } from 'ethers';
+import { Transaction } from 'ethers';
+import { z } from 'zod';
 
 export const blockSchema = z.custom<EthersBlock>();
 export type Block = z.infer<typeof blockSchema>;

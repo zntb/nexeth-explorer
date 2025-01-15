@@ -1,11 +1,11 @@
-import * as trpcNext from "@trpc/server/adapters/next";
-import { getAddress } from "thirdweb";
+import * as trpcNext from '@trpc/server/adapters/next';
+import { getAddress } from 'thirdweb/utils';
 
-import { connect } from "../database";
-import { UserModel } from "../database/models";
-import { User, userSchema } from "../schema";
+import { connect } from '../database';
+import { UserModel } from '../database/models';
+import { User, userSchema } from '../schema';
 
-import { thirdWebService } from "@/lib";
+import { thirdWebService } from '@/lib';
 
 export type AuthSession = {
   address: string;
@@ -39,13 +39,13 @@ export const createAuthContext = async ({
   session.address = getAddress(session.address);
 
   let user = await UserModel.findOne({ address: session.address }).select(
-    "address username avatar"
+    'address username avatar',
   );
   if (!user) {
     user = await UserModel.create({
       address: session.address,
       username: session.address,
-      avatar: "",
+      avatar: '',
     });
   }
 

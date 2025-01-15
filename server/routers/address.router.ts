@@ -1,13 +1,13 @@
-import { getChainProvider } from "@thirdweb-dev/sdk";
-import { formatEther } from "ethers/lib/utils";
+import { getChainProvider } from '@thirdweb-dev/sdk';
+import { formatEther } from 'ethers/lib/utils';
 
-import { procedure, router } from "../router-procedures";
+import { procedure, router } from '../router-procedures';
 import {
   getAddressDetailsResponseSchema,
   getChainAddressRequestSchema,
-} from "../schema";
+} from '../schema';
 
-import { isChainContract } from "@/lib";
+import { isChainContract } from '@/lib';
 
 export const addressRouter = router({
   getDetails: procedure

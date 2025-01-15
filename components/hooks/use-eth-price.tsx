@@ -1,17 +1,17 @@
-import { formatEther, parseEther } from "ethers/lib/utils";
-import { useMemo } from "react";
+import { formatEther, parseEther } from 'ethers/lib/utils';
+import { useMemo } from 'react';
 
-import { formatBigNumber } from "@/lib";
-import { trpc } from "@/server";
+import { formatBigNumber } from '@/lib';
+import { trpc } from '@/server';
 
 export const useEthPrice = () =>
   trpc.chains.getGlobalStats.useQuery(
-    { chain: "ethereum" },
+    { chain: 'ethereum' },
     {
       refetchOnMount: false,
       refetchOnReconnect: false,
       refetchOnWindowFocus: false,
-    }
+    },
   );
 
 export const useUsdPrice = (eth: string) => {
@@ -22,10 +22,10 @@ export const useUsdPrice = (eth: string) => {
       formatEther(
         parseEther(eth)
           .mul(parseEther(data.ethPrice.usd.toString()))
-          .div(parseEther("1"))
-          .toString()
+          .div(parseEther('1'))
+          .toString(),
       ),
-      2
+      2,
     );
   }, [data, eth]);
 

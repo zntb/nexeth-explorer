@@ -1,12 +1,12 @@
-import { isEnsName, resolveEns } from "@thirdweb-dev/react";
-import { isAddress } from "ethers/lib/utils";
+import { isEnsName, resolveEns } from '@thirdweb-dev/react';
+import { isAddress } from 'ethers/lib/utils';
 
-import { procedure, router } from "../router-procedures";
+import { procedure, router } from '../router-procedures';
 import {
   SearchItem,
   searchRequestSchema,
   searchResponseSchema,
-} from "../schema";
+} from '../schema';
 
 import {
   createExplorerUrl,
@@ -18,7 +18,7 @@ import {
   isTransactionHash,
   shortenString,
   toTitleCase,
-} from "@/lib";
+} from '@/lib';
 
 export const searchRouter = router({
   get: procedure
@@ -37,7 +37,7 @@ export const searchRouter = router({
         const results: SearchItem[] = [
           {
             title: `${chain.name} Transaction: ${shortenString(query)}`,
-            type: "transaction",
+            type: 'transaction',
             href: createTransactionLink({ chain, hash: query }),
             chain: chain.slug,
           },
@@ -48,10 +48,10 @@ export const searchRouter = router({
         if (explorer) {
           results.push({
             title: `${chain.name} Transaction: ${shortenString(
-              query
+              query,
             )} (${toTitleCase(explorer.name)})`,
-            type: "transaction",
-            href: createExplorerUrl({ explorer, type: "tx", location: query }),
+            type: 'transaction',
+            href: createExplorerUrl({ explorer, type: 'tx', location: query }),
             external: true,
             chain: chain.slug,
           });
@@ -79,9 +79,9 @@ export const searchRouter = router({
             results: [
               {
                 title: `Address:${
-                  ensName ? ` (${ensName})` : ""
+                  ensName ? ` (${ensName})` : ''
                 } ${shortenString(query)}`,
-                type: "address",
+                type: 'address',
                 href: `/address/all/${query}`,
               },
             ],
@@ -90,12 +90,12 @@ export const searchRouter = router({
 
         const results: SearchItem[] = [];
 
-        chains.map((chain) => {
+        chains.map(chain => {
           results.push({
             title: `${chain.name} Contract:${
-              ensName ? ` (${ensName})` : ""
+              ensName ? ` (${ensName})` : ''
             } ${shortenString(query)}`,
-            type: "contract",
+            type: 'contract',
             href: `/address/${chain.slug}/${query}`,
             chain: chain.slug,
           });
@@ -105,12 +105,12 @@ export const searchRouter = router({
           if (explorer) {
             results.push({
               title: `${chain.name} Contract:${
-                ensName ? ` (${ensName})` : ""
+                ensName ? ` (${ensName})` : ''
               } ${shortenString(query)} (${toTitleCase(explorer.name)})`,
-              type: "contract",
+              type: 'contract',
               href: createExplorerUrl({
                 explorer,
-                type: "address",
+                type: 'address',
                 location: query,
               }),
               external: true,
@@ -129,7 +129,7 @@ export const searchRouter = router({
           results: [
             {
               title: `IPFS Hash: ${shortenString(ipfsQuery)}`,
-              type: "ipfs",
+              type: 'ipfs',
               href: `/ipfs/${ipfsQuery}`,
             },
           ],
